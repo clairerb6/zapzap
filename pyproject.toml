@@ -60,5 +60,10 @@ zapzap = [
   "extensions/*"
 ]
 
+[tool.setuptools.data-files]
+"share/applications" = ["share/applications/com.rtosta.zapzap.desktop"]
+"share/icons/hicolor/scalable/apps" = ["share/icons/com.rtosta.zapzap.svg"]
+"share/metainfo" = ["share/metainfo/com.rtosta.zapzap.appdata.xml"]
+
 [tool.setuptools.dynamic]
 version = { attr = "zapzap.__version__" }
