@@ -15,6 +15,54 @@ See [docs/technical-documentation.md](docs/technical-documentation.md)
 
 ---
 
+## Fork scope and support policy
+
+This repository (`clairerb6/zapzap`) exists to keep **native Linux packaging** up to date, especially:
+
+- RPM
+- DEB
+
+The original project direction has prioritized **Flatpak** and **AppImage**.
+This fork does not redefine product direction and does not propose feature changes upstream by default.
+
+### Where to open issues
+
+- **New features / behavior changes**: open issues in the original repository  
+  `rafatosta/zapzap`
+- **Packaging and native install issues (RPM/DEB)**: open issues in this repository  
+  `clairerb6/zapzap`
+
+In short:
+
+- New feature requests -> `rafatosta/zapzap`
+- Packaging maintenance -> `clairerb6/zapzap`
+
+---
+
+## Alcance del fork y política de soporte (Español)
+
+Este repositorio (`clairerb6/zapzap`) existe para mantener al día el **empaquetado nativo en Linux**, especialmente:
+
+- RPM
+- DEB
+
+La dirección del proyecto original ha priorizado **Flatpak** y **AppImage**.
+Este fork no redefine esa dirección del producto y, por defecto, no impulsa cambios de funcionalidades al upstream.
+
+### Dónde abrir issues
+
+- **Nuevas funcionalidades / cambios de comportamiento**: abrir issues en el repositorio original  
+  `rafatosta/zapzap`
+- **Problemas de empaquetado e instalación nativa (RPM/DEB)**: abrir issues en este repositorio  
+  `clairerb6/zapzap`
+
+En resumen:
+
+- Solicitudes de nuevas características -> `rafatosta/zapzap`
+- Mantenimiento de empaquetados -> `clairerb6/zapzap`
+
+---
+
 ## 📥 Download
 
 - **[Flathub](https://flathub.org/apps/details/com.rtosta.zapzap)**  
@@ -243,8 +291,13 @@ uv tool install . --with-requirements requirements.txt
 ZapZap supports translations. If your language file is missing from the [po](/po) folder, submit a pull request or open an [issue](https://github.com/rafatosta/zapzap/issues).
 
 ## 🤝 Contributions
-Contributions are welcome!
-Please submit a pull request with any improvements or changes you wish to propose.
+Contributions are welcome.
+
+Scope for this fork:
+- Packaging, build scripts, and native install stability (RPM/DEB)
+- Compatibility fixes that improve runtime stability across distros
+
+For new user-facing features, please propose them in `rafatosta/zapzap`.
 
 ## 📜 License
 This project is licensed under the GPL.
