@@ -60,16 +60,31 @@ class PageController(QWebEnginePage):
 
     def set_theme_light(self):
         """Altera o tema da página para claro."""
-        self.profile().settings().setAttribute(
-            QWebEngineSettings.WebAttribute.ForceDarkMode, False)
+        force_dark_attr = getattr(
+            QWebEngineSettings.WebAttribute,
+            "ForceDarkMode",
+            None
+        )
+        if force_dark_attr is not None:
+            try:
+                self.profile().settings().setAttribute(force_dark_attr, False)
+            except Exception:
+                pass
 
         self.runJavaScript("document.body.classList.remove('dark');")
 
     def set_theme_dark(self):
         """Altera o tema da página para escuro."""
-
-        self.profile().settings().setAttribute(
-            QWebEngineSettings.WebAttribute.ForceDarkMode, False)
+        force_dark_attr = getattr(
+            QWebEngineSettings.WebAttribute,
+            "ForceDarkMode",
+            None
+        )
+        if force_dark_attr is not None:
+            try:
+                self.profile().settings().setAttribute(force_dark_attr, False)
+            except Exception:
+                pass
 
         self.runJavaScript("document.body.classList.add('dark');")
 
@@ -147,11 +162,21 @@ class PageController(QWebEnginePage):
             self.apply_customizations()
 
             # Permite notificações automaticamente
-            self.setFeaturePermission(
-                self.url(),
-                QWebEnginePage.Feature.Notifications,
-                QWebEnginePage.PermissionPolicy.PermissionGrantedByUser
+            feature_notifications = getattr(QWebEnginePage.Feature, "Notifications", None)
+            permission_granted = getattr(
+                QWebEnginePage.PermissionPolicy,
+                "PermissionGrantedByUser",
+                None
             )
+            if feature_notifications is not None and permission_granted is not None:
+                try:
+                    self.setFeaturePermission(
+                        self.url(),
+                        feature_notifications,
+                        permission_granted
+                    )
+                except Exception:
+                    pass
             # Força a sincronização do tema ao carregar a página
             ThemeManager.sync()
 

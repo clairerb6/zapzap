@@ -69,19 +69,47 @@ class WebView(QWebEngineView):
                 self
             )
         )
-        self.profile.setNotificationPresenter(
-            lambda notification: self.notifications.notify(self, notification)
+        # Some distros ship older QtWebEngine APIs; degrade gracefully.
+        if hasattr(self.profile, "setNotificationPresenter"):
+            try:
+                self.profile.setNotificationPresenter(
+                    lambda notification: self.notifications.notify(self, notification)
+                )
+            except Exception:
+                pass
+
+        scroll_attr = getattr(
+            QWebEngineSettings.WebAttribute,
+            "ScrollAnimatorEnabled",
+            None
         )
-        self.profile.settings().setAttribute(
-            QWebEngineSettings.WebAttribute.ScrollAnimatorEnabled, SettingsManager.get("web/scroll_animator", False))
+        if scroll_attr is not None:
+            try:
+                self.profile.settings().setAttribute(
+                    scroll_attr,
+                    SettingsManager.get("web/scroll_animator", False)
+                )
+            except Exception:
+                pass
 
         self.configure_spellcheck()
 
         size_cache = SettingsManager.get("performance/cache_size_max", 0)
-        self.profile.setHttpCacheMaximumSize(1024 * 1024 * int(size_cache))
-        self.profile.setHttpCacheType(
-            self.QWEBENGINE_CACHE_TYPES.get(SettingsManager.get(
-                "performance/cache_type", "DiskHttpCache")))
+        if hasattr(self.profile, "setHttpCacheMaximumSize"):
+            try:
+                self.profile.setHttpCacheMaximumSize(1024 * 1024 * int(size_cache))
+            except Exception:
+                pass
+
+        if hasattr(self.profile, "setHttpCacheType"):
+            try:
+                self.profile.setHttpCacheType(
+                    self.QWEBENGINE_CACHE_TYPES.get(
+                        SettingsManager.get("performance/cache_type", "DiskHttpCache")
+                    )
+                )
+            except Exception:
+                pass
 
         # Instala o handler de crash específico para este WebView
         crash_handler.register_profile(self.profile)
@@ -89,13 +117,24 @@ class WebView(QWebEngineView):
     def configure_spellcheck(self):
         """Configura o corretor ortográfico."""
         if self.user.enable:
-            self.profile.setSpellCheckEnabled(
-                SettingsManager.get("system/spellCheckers", True))
+            if hasattr(self.profile, "setSpellCheckEnabled"):
+                try:
+                    self.profile.setSpellCheckEnabled(
+                        SettingsManager.get("system/spellCheckers", True)
+                    )
+                except Exception:
+                    pass
 
-            self.profile.setSpellCheckLanguages(
-                [SettingsManager.get("system/spellCheckLanguage",
-                                     DictionariesManager.get_current_dict())]
-            )
+            if hasattr(self.profile, "setSpellCheckLanguages"):
+                try:
+                    self.profile.setSpellCheckLanguages(
+                        [SettingsManager.get(
+                            "system/spellCheckLanguage",
+                            DictionariesManager.get_current_dict()
+                        )]
+                    )
+                except Exception:
+                    pass
 
     def _setup_page(self):
         """Configura a página e carrega a URL inicial."""

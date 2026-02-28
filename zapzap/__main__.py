@@ -47,7 +47,11 @@ def main():
         zapzap.__appid__, sys.argv + SetupManager.get_argv())
     app.setApplicationName(zapzap.__appname__)
     app.setApplicationVersion(zapzap.__version__)
-    app.setDesktopFileName(zapzap.__desktopid__)
+    if hasattr(app, "setDesktopFileName"):
+        try:
+            app.setDesktopFileName(zapzap.__desktopid__)
+        except Exception:
+            pass
     app.setOrganizationDomain(zapzap.__domain__)
     app.setWindowIcon(TrayIcon.getIcon())
 
