@@ -65,3 +65,4 @@ cp -R share/icons/com.rtosta.zapzap.svg $RPM_BUILD_ROOT/usr/share/icons/hicolor/
 %{_bindir}/%{srcname}
 /usr/share/applications/com.rtosta.zapzap.desktop
 /usr/share/icons/hicolor/scalable/apps/com.rtosta.zapzap.svg
+/usr/share/metainfo/com.rtosta.zapzap.appdata.xml
