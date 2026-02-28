@@ -8,6 +8,7 @@ from PyQt6.QtCore import QUrl, QFileInfo
 from PyQt6.QtWebEngineCore import QWebEngineDownloadRequest
 from gettext import gettext as _
 import os
+import shutil
 
 from zapzap.services.SettingsManager import SettingsManager
 
@@ -124,11 +125,19 @@ class DownloadToaster(QWidget):
     # ===============================
     # Actions
     # ===============================
+    def _resume_download(self):
+        try:
+            if hasattr(self.download, "isPaused") and self.download.isPaused():
+                self.download.resume()
+            elif self.download.state() == QWebEngineDownloadRequest.DownloadState.DownloadRequested:
+                self.download.accept()
+        except RuntimeError:
+            return
 
     def _open_file(self):
         try:
             directory = self.download.downloadDirectory()
-            self.download.accept()
+            self._resume_download()
         except RuntimeError:
             return
 
@@ -144,8 +153,8 @@ class DownloadToaster(QWidget):
 
     def _open_folder(self):
         try:
-            self.download.accept()
             directory = self.download.downloadDirectory()
+            self._resume_download()
         except RuntimeError:
             return
 
@@ -181,9 +190,30 @@ class DownloadToaster(QWidget):
             return
 
         try:
-            self.download.setDownloadDirectory(os.path.dirname(path))
-            self.download.setDownloadFileName(os.path.basename(path))
-            self.download.accept()
+            requested_dir = os.path.dirname(path)
+            requested_name = os.path.basename(path)
+
+            self.download.setDownloadDirectory(requested_dir)
+            self.download.setDownloadFileName(requested_name)
+
+            # If Qt ignores destination changes after accept(), move on completion.
+            current_dir = self.download.downloadDirectory()
+            current_name = self.download.downloadFileName()
+            if current_dir != requested_dir or current_name != requested_name:
+                def move_when_done(state):
+                    if state != QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
+                        return
+                    try:
+                        source = os.path.join(current_dir, current_name)
+                        if os.path.exists(source):
+                            os.makedirs(requested_dir, exist_ok=True)
+                            shutil.move(source, path)
+                    except Exception:
+                        pass
+
+                self.download.stateChanged.connect(move_when_done)
+
+            self._resume_download()
         except RuntimeError:
             return
 
