@@ -126,8 +126,11 @@ class DownloadToaster(QWidget):
     # ===============================
 
     def _open_file(self):
-        directory = self.download.downloadDirectory()
-        self.download.accept()
+        try:
+            directory = self.download.downloadDirectory()
+            self.download.accept()
+        except RuntimeError:
+            return
 
         def open_when_done(state):
             if state == QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
@@ -140,18 +143,24 @@ class DownloadToaster(QWidget):
         self.download.stateChanged.connect(open_when_done)
 
     def _open_folder(self):
-        self.download.accept()
-        QDesktopServices.openUrl(
-            QUrl.fromLocalFile(self.download.downloadDirectory())
-        )
+        try:
+            self.download.accept()
+            directory = self.download.downloadDirectory()
+        except RuntimeError:
+            return
+
+        QDesktopServices.openUrl(QUrl.fromLocalFile(directory))
 
     def _save_as(self):
         """
         Reutiliza a lógica original de save_download
         """
 
-        directory = self.download.downloadDirectory()
-        file_name = self.download.downloadFileName()
+        try:
+            directory = self.download.downloadDirectory()
+            file_name = self.download.downloadFileName()
+        except RuntimeError:
+            return
         suffix = QFileInfo(file_name).suffix()
 
         options = (
@@ -171,12 +180,19 @@ class DownloadToaster(QWidget):
         if not path:
             return
 
-        self.download.setDownloadDirectory(os.path.dirname(path))
-        self.download.setDownloadFileName(os.path.basename(path))
-        self.download.accept()
+        try:
+            self.download.setDownloadDirectory(os.path.dirname(path))
+            self.download.setDownloadFileName(os.path.basename(path))
+            self.download.accept()
+        except RuntimeError:
+            return
 
     def _cancel(self):
-        self.download.cancel()
+        try:
+            self.download.cancel()
+        except RuntimeError:
+            # The underlying Qt download request may already be destroyed.
+            pass
         self.close()
 
     # ===============================
