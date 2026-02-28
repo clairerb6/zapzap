@@ -27,7 +27,7 @@ Version: $VERSION
 Section: utils
 Priority: optional
 Architecture: amd64
-Depends: python3, python3-pyqt6.qtwebengine, python3-dbus
+Depends: python3, python3-pyqt6.qtwebengine, python3-pyqt6.qtsvg, python3-dbus
 Maintainer: Katherine Flores <me@katherineflores.me>
 Description: ZapZap - Cliente no oficial de WhatsApp Web para Linux.
 EOF
