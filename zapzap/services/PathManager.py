@@ -18,6 +18,10 @@ class PathManager:
             "path": "",
             "default": "/usr/share/qt6/qtwebengine_dictionaries",
         },
+        Packaging.DEB: {
+            "path": "",
+            "default": "/usr/share/qt6/qtwebengine_dictionaries",
+        },
         Packaging.UNOFFICIAL: {
             "path": "",
             "default": "/usr/share/qt6/qtwebengine_dictionaries",

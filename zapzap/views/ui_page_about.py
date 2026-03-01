@@ -1,5 +1,5 @@
 from gettext import gettext as _
-# Form implementation generated from reading ui file './zapzap/ui/ui_page_about.ui'
+# Form implementation generated from reading ui file 'zapzap/ui/ui_page_about.ui'
 #
 # Created by: PyQt6 UI code generator 6.10.2
 #
@@ -97,13 +97,29 @@ class Ui_PageAbout(object):
         self.btnReportIssue.setSizePolicy(sizePolicy)
         self.btnReportIssue.setObjectName("btnReportIssue")
         self.horizontalLayout_2.addWidget(self.btnReportIssue)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
-        self.horizontalLayout.addWidget(self.frame)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout.addItem(spacerItem3)
+        self.horizontalLayout_2.addItem(spacerItem3)
+        self.btnFeatureRequest = QtWidgets.QPushButton(parent=self.frame)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btnFeatureRequest.sizePolicy().hasHeightForWidth())
+        self.btnFeatureRequest.setSizePolicy(sizePolicy)
+        self.btnFeatureRequest.setObjectName("btnFeatureRequest")
+        self.horizontalLayout_2.addWidget(self.btnFeatureRequest)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
+        self.lblDisclaimer = QtWidgets.QLabel(parent=self.frame)
+        self.lblDisclaimer.setStyleSheet("font-size: 11pt;")
+        self.lblDisclaimer.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.lblDisclaimer.setWordWrap(True)
+        self.lblDisclaimer.setObjectName("lblDisclaimer")
+        self.verticalLayout_2.addWidget(self.lblDisclaimer)
+        self.horizontalLayout.addWidget(self.frame)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout.addItem(spacerItem4)
         self.verticalLayout_3.addLayout(self.horizontalLayout)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 295, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_3.addItem(spacerItem4)
+        spacerItem5 = QtWidgets.QSpacerItem(20, 295, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_3.addItem(spacerItem5)
 
         self.retranslateUi(PageAbout)
         QtCore.QMetaObject.connectSlotsByName(PageAbout)
@@ -116,6 +132,8 @@ class Ui_PageAbout(object):
         self.name_app.setText(_("ZapZap"))
         self.btnLeanMore.setText(_("Learn more"))
         self.btnReportIssue.setText(_("Report issue"))
+        self.btnFeatureRequest.setText(_("Request feature"))
+        self.lblDisclaimer.setText(_("This package is an unofficial build. ZapZap original development and all project credits belong to Rafael Tosta. Legacy package maintenance (RPM and DEB) is provided independently by this fork."))
 
 
 if __name__ == "__main__":

@@ -7,10 +7,57 @@ class Packaging(Enum):
     APPIMAGE = "AppImage"
     FLATPAK = "Flatpak"
     RPM = "RPM"
+    DEB = "DEB"
     UNOFFICIAL = "Unofficial"
 
 
 class EnvironmentManager:
+    @staticmethod
+    def identify_distribution() -> str:
+        """Identifies Linux distribution using /etc/os-release."""
+        os_release_path = "/etc/os-release"
+        if not os.path.exists(os_release_path):
+            return ""
+
+        values = {}
+        try:
+            with open(os_release_path, "r", encoding="utf-8") as os_release_file:
+                for line in os_release_file:
+                    line = line.strip()
+                    if not line or line.startswith("#") or "=" not in line:
+                        continue
+
+                    key, value = line.split("=", 1)
+                    values[key] = value.strip().strip('"')
+        except OSError:
+            return ""
+
+        if values.get("PRETTY_NAME"):
+            return values["PRETTY_NAME"]
+
+        name = values.get("NAME", "").strip()
+        version = values.get("VERSION_ID", "").strip()
+        if name and version:
+            return f"{name} {version}"
+
+        return name
+
+    @staticmethod
+    def _detect_system_packaging(app_path: str):
+        """Detects system package format (DEB/RPM) for binaries in standard paths."""
+        if not (app_path.startswith("/usr/bin/") or app_path.startswith("/usr/local/bin/")):
+            return Packaging.UNOFFICIAL
+
+        # Debian/Ubuntu and derivatives
+        if os.path.exists("/etc/debian_version") or os.path.exists("/var/lib/dpkg/status"):
+            return Packaging.DEB
+
+        # Fedora/RHEL/openSUSE and derivatives
+        if os.path.exists("/var/lib/rpm") or os.path.exists("/usr/bin/rpm"):
+            return Packaging.RPM
+
+        return Packaging.UNOFFICIAL
+
     @staticmethod
     def identify_packaging():
         """Identifies the packaging type of the application and returns an Enum."""
@@ -23,10 +70,7 @@ class EnvironmentManager:
         # Identification via executable path
         app_path = os.path.abspath(sys.argv[0])
 
-        if app_path.startswith("/usr/bin/") or app_path.startswith("/usr/local/bin/"):
-            return Packaging.RPM  # Assuming it's an RPM package
-
-        return Packaging.UNOFFICIAL
+        return EnvironmentManager._detect_system_packaging(app_path)
 
     @staticmethod
     def show_information():
@@ -42,7 +86,5 @@ class EnvironmentManager:
 
     @staticmethod
     def isOfficial() -> bool:
-        if EnvironmentManager.identify_packaging() == Packaging.UNOFFICIAL:
-            return False
-
-        return True
+        # Official upstream channels.
+        return EnvironmentManager.identify_packaging() in {Packaging.APPIMAGE, Packaging.FLATPAK}

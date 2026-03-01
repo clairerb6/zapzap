@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-19 09:48-0300\n"
+"POT-Creation-Date: 2026-03-01 04:14-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Isaías Gätjens M <igatjens@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,7 +67,7 @@ msgstr "Eliminar"
 msgid "Enter the user name"
 msgstr "Escriba el nombre de usuario"
 
-#: zapzap/views/ui_mainwindow.py:100 zapzap/views/ui_page_about.py:116
+#: zapzap/views/ui_mainwindow.py:100 zapzap/views/ui_page_about.py:132
 #: zapzap/views/ui_qtoaster_donation.py:137
 #: zapzap/views/ui_shortcuts_dialog.py:65
 msgid "ZapZap"
@@ -193,27 +193,42 @@ msgstr "Ctrl+M"
 msgid "Keyboard shortcuts"
 msgstr "Atajos de teclado"
 
-#: zapzap/views/ui_mainwindow.py:130 zapzap/views/ui_page_about.py:113
+#: zapzap/views/ui_mainwindow.py:130 zapzap/views/ui_page_about.py:129
 #: zapzap/views/ui_settings.py:141
 msgid "About"
 msgstr "Acerca de"
 
-#: zapzap/views/ui_page_about.py:114
+#: zapzap/views/ui_page_about.py:130
 msgid "WhatsApp Web for Linux"
 msgstr "WhatsApp Web para Linux"
 
-#: zapzap/views/ui_page_about.py:115
+#: zapzap/views/ui_page_about.py:131
 #, python-brace-format
 msgid "Version {id} ({version_type}) - {package}"
 msgstr ""
 
-#: zapzap/views/ui_page_about.py:117
+#: zapzap/views/ui_page_about.py:133
 msgid "Learn more"
 msgstr "Más información"
 
-#: zapzap/views/ui_page_about.py:118
+#: zapzap/views/ui_page_about.py:134
 msgid "Report issue"
 msgstr "Reportar un problema"
+
+#: zapzap/views/ui_page_about.py:135
+msgid "Request feature"
+msgstr "Solicitar nueva característica"
+
+#: zapzap/views/ui_page_about.py:136
+msgid ""
+"This package is an unofficial build. ZapZap original development and all "
+"project credits belong to Rafael Tosta. Legacy package maintenance (RPM and "
+"DEB) is provided independently by this fork."
+msgstr ""
+"Este paquete es una compilación no oficial. El desarrollo original de ZapZap "
+"y todos los créditos del proyecto pertenecen a Rafael Tosta. El "
+"mantenimiento de paquetes legacy (RPM y DEB) se realiza de forma "
+"independiente desde este fork."
 
 #: zapzap/views/ui_page_account.py:86
 msgid "My accounts"
@@ -377,7 +392,7 @@ msgstr ""
 #: zapzap/views/ui_page_customizations.py:259
 #: zapzap/views/ui_page_customizations.py:273
 #: zapzap/controllers/DialogDumpHandler.py:50
-#: zapzap/controllers/DownloadToaster.py:60
+#: zapzap/controllers/DownloadToaster.py:61
 #, fuzzy
 msgid "Open folder"
 msgstr "Seleccionar carpeta"
@@ -698,40 +713,6 @@ msgstr "Diálogo"
 msgid "WhatsApp Web"
 msgstr "WhatsApp Web"
 
-#: zapzap/controllers/CardUser.py:85
-msgid "Confirm exclusion"
-msgstr "Confirmar exclusión"
-
-#: zapzap/controllers/CardUser.py:85
-msgid "Are you sure you want to delete this item?"
-msgstr "¿Está seguro que quiere eliminar este ítem?"
-
-#: zapzap/controllers/CardUser.py:109
-msgid "Restore standard"
-msgstr "Restablecer estándar"
-
-#: zapzap/controllers/DialogDumpHandler.py:26
-msgid "Unexpected Error"
-msgstr ""
-
-#: zapzap/controllers/DialogDumpHandler.py:29
-msgid "The application encountered an unexpected error."
-msgstr ""
-
-#: zapzap/controllers/DialogDumpHandler.py:34
-#, python-brace-format
-msgid ""
-"A diagnostic report was generated automatically at:\n"
-"\n"
-"{path}\n"
-"\n"
-"Please send this file to support so we can investigate the issue.\n"
-"\n"
-"Report channels:\n"
-" - Issue tracker: {issue_url}\n"
-" - Email: {email}"
-msgstr ""
-
 #: zapzap/controllers/PageAbout.py:21
 #, fuzzy
 msgid "Official compilation"
@@ -743,10 +724,6 @@ msgstr ""
 
 #: zapzap/controllers/PageAbout.py:25
 msgid "Unknown"
-msgstr ""
-
-#: zapzap/controllers/PageGeneral.py:38
-msgid "Use Flatseal to change this mode of execution"
 msgstr ""
 
 #: zapzap/controllers/ShortcutsDialog.py:11
@@ -840,6 +817,65 @@ msgstr "Recargar páginas"
 #: zapzap/controllers/ShortcutsDialog.py:55
 msgid "New conversation by phone number"
 msgstr "Nueva conversación usando número de teléfono"
+
+#: zapzap/controllers/CardUser.py:85
+msgid "Confirm exclusion"
+msgstr "Confirmar exclusión"
+
+#: zapzap/controllers/CardUser.py:85
+msgid "Are you sure you want to delete this item?"
+msgstr "¿Está seguro que quiere eliminar este ítem?"
+
+#: zapzap/controllers/CardUser.py:109
+msgid "Restore standard"
+msgstr "Restablecer estándar"
+
+#: zapzap/controllers/DialogDumpHandler.py:26
+msgid "Unexpected Error"
+msgstr ""
+
+#: zapzap/controllers/DialogDumpHandler.py:29
+msgid "The application encountered an unexpected error."
+msgstr ""
+
+#: zapzap/controllers/DialogDumpHandler.py:34
+#, python-brace-format
+msgid ""
+"A diagnostic report was generated automatically at:\n"
+"\n"
+"{path}\n"
+"\n"
+"Please send this file to support so we can investigate the issue.\n"
+"\n"
+"Report channels:\n"
+" - Issue tracker: {issue_url}\n"
+" - Email: {email}"
+msgstr ""
+
+#: zapzap/controllers/PageGeneral.py:38
+msgid "Use Flatseal to change this mode of execution"
+msgstr ""
+
+#: zapzap/controllers/Browser.py:164 zapzap/controllers/Browser.py:192
+msgid "Account {}"
+msgstr "Cuenta {}"
+
+#: zapzap/controllers/DownloadToaster.py:58
+msgid "Open"
+msgstr "Abrir"
+
+#: zapzap/controllers/DownloadToaster.py:64
+#, fuzzy
+msgid "Save as"
+msgstr "Guardar"
+
+#: zapzap/controllers/DownloadToaster.py:67
+msgid "Cancel"
+msgstr ""
+
+#: zapzap/controllers/DownloadToaster.py:183
+msgid "Save file"
+msgstr "Guardar archivo"
 
 #: zapzap/controllers/PageCustomizations.py:52
 msgid "Global"
@@ -1064,27 +1100,6 @@ msgstr ""
 msgid "All pages reloaded."
 msgstr ""
 
-#: zapzap/controllers/Browser.py:164 zapzap/controllers/Browser.py:192
-msgid "Account {}"
-msgstr "Cuenta {}"
-
-#: zapzap/controllers/DownloadToaster.py:57
-msgid "Open"
-msgstr "Abrir"
-
-#: zapzap/controllers/DownloadToaster.py:63
-#, fuzzy
-msgid "Save as"
-msgstr "Guardar"
-
-#: zapzap/controllers/DownloadToaster.py:66
-msgid "Cancel"
-msgstr ""
-
-#: zapzap/controllers/DownloadToaster.py:165
-msgid "Save file"
-msgstr "Guardar archivo"
-
 #: zapzap/controllers/PagePerformance.py:245
 msgid ""
 "Defines where the HTTP cache will be stored.\n"
@@ -1228,6 +1243,15 @@ msgstr "Mostrar"
 #: zapzap/services/SysTrayManager.py:56
 msgid "Donation"
 msgstr "Donación"
+
+#: zapzap/services/DownloadManager.py:60
+msgid "Download canceled"
+msgstr ""
+
+#: zapzap/services/DownloadManager.py:81
+#, fuzzy
+msgid "Select folder"
+msgstr "Seleccionar carpeta"
 
 #~ msgid "Cache Behavior"
 #~ msgstr "Comportamiento de caché"
