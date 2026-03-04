@@ -1,4 +1,6 @@
 from os import environ, getenv
+import os
+import sys
 from PyQt6.QtCore import QFileInfo
 from zapzap.services.DictionariesManager import DictionariesManager
 from zapzap.services.SettingsManager import SettingsManager
@@ -11,6 +13,10 @@ class SetupManager:
     _qt_platform_xcb = "xcb"  # Valor padrão: X11
 
     @staticmethod
+    def _is_linux() -> bool:
+        return sys.platform.startswith("linux")
+
+    @staticmethod
     def apply():
         """
         Aplica configurações de ambiente antes da inicialização do Qt / QtWebEngine.
@@ -20,7 +26,7 @@ class SetupManager:
         # --------------------------------------------------
         # Plataforma gráfica
         # --------------------------------------------------
-        if not SetupManager._is_flatpak:
+        if SetupManager._is_linux() and not SetupManager._is_flatpak:
             platform = SetupManager.get_qt_platform()
             if platform:
                 environ["QT_QPA_PLATFORM"] = platform
@@ -35,7 +41,9 @@ class SetupManager:
         # --------------------------------------------------
         # Dicionários (spellcheck)
         # --------------------------------------------------
-        environ["QTWEBENGINE_DICTIONARIES_PATH"] = DictionariesManager.get_path()
+        dictionaries_path = DictionariesManager.get_path()
+        if dictionaries_path and os.path.isdir(dictionaries_path):
+            environ["QTWEBENGINE_DICTIONARIES_PATH"] = dictionaries_path
 
         # --------------------------------------------------
         # Flags do Chromium (Qt WebEngine)
@@ -121,10 +129,11 @@ class SetupManager:
 
     @staticmethod
     def get_qt_platform():
-        if "QT_QPA_PLATFORM" in environ:
+        if not SetupManager._is_linux():
             return None
 
-        import sys
+        if "QT_QPA_PLATFORM" in environ:
+            return None
         if "--wayland" in sys.argv:
             return "wayland"
 

@@ -1,4 +1,5 @@
 from pathlib import Path
+import sys
 from gettext import gettext as _
 
 from PyQt6.QtWebEngineCore import QWebEngineNotification
@@ -6,13 +7,6 @@ from PyQt6.QtWebEngineCore import QWebEngineNotification
 from zapzap.webengine import WebView
 from zapzap.services.SettingsManager import SettingsManager
 from zapzap import __appname__
-
-from zapzap.notifications.PortalNotificationBackend import (
-    PortalNotificationBackend
-)
-from zapzap.notifications.FreedesktopNotificationBackend import (
-    FreedesktopNotificationBackend
-)
 
 
 def is_flatpak() -> bool:
@@ -39,11 +33,29 @@ class NotificationService:
     # Backend selection
     # ------------------------------------------------------------------
     def _select_backend(self):
-        if is_flatpak():
-            return PortalNotificationBackend()
+        if sys.platform.startswith("win"):
+            from zapzap.notifications.WindowsNotificationBackend import (
+                WindowsNotificationBackend
+            )
+            return WindowsNotificationBackend()
 
-        backend = FreedesktopNotificationBackend()
-        return backend if backend.available() else None
+        if is_flatpak():
+            try:
+                from zapzap.notifications.PortalNotificationBackend import (
+                    PortalNotificationBackend
+                )
+                return PortalNotificationBackend()
+            except Exception:
+                return None
+
+        try:
+            from zapzap.notifications.FreedesktopNotificationBackend import (
+                FreedesktopNotificationBackend
+            )
+            backend = FreedesktopNotificationBackend()
+            return backend if backend.available() else None
+        except Exception:
+            return None
 
     # ------------------------------------------------------------------
     # Public API

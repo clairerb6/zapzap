@@ -1,5 +1,9 @@
 from PyQt6.QtCore import QTimer
-from PyQt6.QtDBus import QDBusInterface
+from PyQt6.QtCore import Qt
+try:
+    from PyQt6.QtDBus import QDBusInterface
+except Exception:
+    QDBusInterface = None
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtGui import QPalette, QColor
 from enum import Enum
@@ -161,6 +165,20 @@ class ThemeManager:
             - ThemeManager.Type.Dark se o tema escuro for preferido
             - ThemeManager.Type.Light se o tema claro for preferido
         """
+        app = QApplication.instance()
+        if app and hasattr(app, "styleHints"):
+            try:
+                color_scheme = app.styleHints().colorScheme()
+                if color_scheme == Qt.ColorScheme.Dark:
+                    return ThemeManager.Type.Dark
+                if color_scheme == Qt.ColorScheme.Light:
+                    return ThemeManager.Type.Light
+            except Exception:
+                pass
+
+        if QDBusInterface is None:
+            return ThemeManager.Type.Light
+
         try:
             interface = QDBusInterface(
                 "org.freedesktop.portal.Desktop",
