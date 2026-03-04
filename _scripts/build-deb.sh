@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+cd "${REPO_ROOT}"
+
 rm *.deb -f
 rm deb_build -Rf
 
@@ -32,7 +38,7 @@ Maintainer: Katherine Flores <me@katherineflores.me>
 Description: ZapZap - Cliente no oficial de WhatsApp Web para Linux.
 EOF
 
-rsync -av --exclude='deb_build' --exclude='*.deb' --exclude='.git' --exclude='.github' --exclude='make-deb.sh' --exclude='share' ./ deb_build/usr/share/zapzap/
+rsync -av --exclude='deb_build' --exclude='*.deb' --exclude='.git' --exclude='.github' --exclude='_scripts' --exclude='share' ./ deb_build/usr/share/zapzap/
 
 dpkg-deb --build deb_build
 
