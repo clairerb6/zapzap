@@ -553,7 +553,7 @@ class CustomizationsManager:
 
     @staticmethod
     def _entry_id(prefix: str, entry_key: str):
-        digest = hashlib.sha1(entry_key.encode("utf-8")).hexdigest()[:12]
+        digest = hashlib.sha256(entry_key.encode("utf-8")).hexdigest()[:12]
         return f"zapzap-custom-{prefix}-{digest}"
 
     @staticmethod
