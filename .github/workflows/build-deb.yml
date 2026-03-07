@@ -2,8 +2,6 @@ name: Build Debian package
 
 on:
   push:
-    branches:
-      - main
     tags:
       - "v*"
   pull_request:
@@ -29,7 +27,7 @@ jobs:
             python3
 
       - name: Build .deb package
-        run: ./make-deb.sh
+        run: ./_scripts/build-deb.sh
 
       # 🧪 Siempre subimos artifact (PRs, pushes, tags)
       - name: Upload .deb artifact
