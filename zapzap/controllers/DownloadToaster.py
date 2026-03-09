@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import (
     QHBoxLayout, QVBoxLayout, QStyle, QFrame, QFileDialog
 )
 from PyQt6 import QtCore, QtWidgets
-from PyQt6.QtGui import QDesktopServices, QIcon
+from PyQt6.QtGui import QDesktopServices, QIcon, QCloseEvent
 from PyQt6.QtCore import QUrl, QFileInfo
 from PyQt6.QtWebEngineCore import QWebEngineDownloadRequest
 from gettext import gettext as _
@@ -24,6 +24,8 @@ class DownloadToaster(QWidget):
 
         self.download = download
         self.margin = 10
+        self._cancelled = False
+        self._download_started = False
 
         self.setFocus()
         self.setFocusPolicy(QtCore.Qt.FocusPolicy.ClickFocus)
@@ -31,6 +33,7 @@ class DownloadToaster(QWidget):
             QtWidgets.QSizePolicy.Policy.Maximum,
             QtWidgets.QSizePolicy.Policy.Maximum
         )
+        self.setAttribute(QtCore.Qt.WidgetAttribute.WA_DeleteOnClose, True)
 
         self._build_ui()
 
@@ -129,8 +132,10 @@ class DownloadToaster(QWidget):
         try:
             if hasattr(self.download, "isPaused") and self.download.isPaused():
                 self.download.resume()
+                self._download_started = True
             elif self.download.state() == QWebEngineDownloadRequest.DownloadState.DownloadRequested:
                 self.download.accept()
+                self._download_started = True
         except RuntimeError:
             return
 
@@ -218,6 +223,7 @@ class DownloadToaster(QWidget):
             return
 
     def _cancel(self):
+        self._cancelled = True
         try:
             self.download.cancel()
         except RuntimeError:
@@ -230,4 +236,17 @@ class DownloadToaster(QWidget):
     # ===============================
 
     def focusOutEvent(self, event):
+        self._resume_if_pending()
+        super().focusOutEvent(event)
         self.close()
+
+    def closeEvent(self, event: QCloseEvent):
+        if self.parent():
+            self.parent().removeEventFilter(self)
+        self._resume_if_pending()
+        super().closeEvent(event)
+
+    def _resume_if_pending(self):
+        if self._cancelled or self._download_started:
+            return
+        self._resume_download()
