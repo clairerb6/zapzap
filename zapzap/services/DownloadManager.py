@@ -64,7 +64,12 @@ class DownloadManager:
         download.stateChanged.connect(on_state_changed)
 
         toaster = DownloadToaster(download, parent)
-        toaster.show()
+        DownloadManager._floating_cards.append(toaster)
+        toaster.destroyed.connect(
+            lambda *_: DownloadManager._floating_cards.remove(toaster)
+            if toaster in DownloadManager._floating_cards else None
+        )
+        toaster.open()
 
     @staticmethod
     def open_folder_dialog(parent):

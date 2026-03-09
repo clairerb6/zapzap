@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import (
-    QWidget, QLabel, QPushButton,
+    QDialog, QLabel, QPushButton,
     QHBoxLayout, QVBoxLayout, QStyle, QFrame, QFileDialog
 )
 from PyQt6 import QtCore, QtWidgets
@@ -13,7 +13,7 @@ import shutil
 from zapzap.services.SettingsManager import SettingsManager
 
 
-class DownloadToaster(QWidget):
+class DownloadToaster(QDialog):
     """
     Download toaster aligned with QtoasterDonation pattern.
     Top-right, solid background, floating inside the app.
@@ -23,29 +23,22 @@ class DownloadToaster(QWidget):
         super().__init__(parent)
 
         self.download = download
-        self.margin = 10
         self._cancelled = False
         self._download_started = False
         self._open_file_after_download = False
         self._open_folder_after_download = False
 
-        self.setFocus()
-        self.setFocusPolicy(QtCore.Qt.FocusPolicy.ClickFocus)
         self.setSizePolicy(
             QtWidgets.QSizePolicy.Policy.Maximum,
             QtWidgets.QSizePolicy.Policy.Maximum
         )
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_DeleteOnClose, True)
+        self.setModal(True)
+        self.setWindowTitle(_("Download"))
+        self.setWindowFlag(QtCore.Qt.WindowType.WindowContextHelpButtonHint, False)
 
         self._build_ui()
         self.download.stateChanged.connect(self._handle_download_state_changed)
-
-        if self.parent():
-            self.parent().installEventFilter(self)
-
-        self.raise_()
-        self.adjustSize()
-        self._reposition()
 
     # ===============================
     # UI
@@ -57,6 +50,9 @@ class DownloadToaster(QWidget):
         container = QFrame(self)
         container.setObjectName("Container")
         container.setFrameShape(QFrame.Shape.NoFrame)
+
+        message = QLabel(_("Choose what to do with this download."))
+        message.setWordWrap(True)
 
         title = QLabel(self.download.downloadFileName())
         title.setWordWrap(True)
@@ -91,11 +87,12 @@ class DownloadToaster(QWidget):
 
         content = QVBoxLayout(container)
         content.setSpacing(8)
+        content.addWidget(message)
         content.addWidget(title)
         content.addLayout(buttons)
 
         outer = QVBoxLayout(self)
-        outer.setContentsMargins(0, 0, 0, 0)
+        outer.setContentsMargins(12, 12, 12, 12)
         outer.addWidget(container)
 
         container.setStyleSheet("""
@@ -106,27 +103,6 @@ class DownloadToaster(QWidget):
                 padding: 10px;
             }
         """)
-
-    # ===============================
-    # Positioning
-    # ===============================
-
-    def _reposition(self):
-        if not self.parent():
-            return
-
-        rect = self.parent().rect()
-        geo = self.geometry()
-        geo.moveBottomLeft(
-            rect.bottomLeft() +
-            QtCore.QPoint(self.margin+65, -self.margin)
-        )
-        self.setGeometry(geo)
-
-    def eventFilter(self, source, event):
-        if source == self.parent() and event.type() == QtCore.QEvent.Type.Resize:
-            self._reposition()
-        return super().eventFilter(source, event)
 
     # ===============================
     # Actions
@@ -231,8 +207,6 @@ class DownloadToaster(QWidget):
         self.close()
 
     def closeEvent(self, event: QCloseEvent):
-        if self.parent():
-            self.parent().removeEventFilter(self)
         self._resume_if_pending()
         super().closeEvent(event)
 
