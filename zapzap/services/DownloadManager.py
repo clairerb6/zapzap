@@ -2,6 +2,7 @@ from PyQt6.QtWebEngineCore import QWebEngineDownloadRequest
 from PyQt6.QtCore import QStandardPaths
 from gettext import gettext as _
 from zapzap.services.SettingsManager import SettingsManager
+from PyQt6.QtCore import QTimer
 from PyQt6.QtWidgets import QFileDialog
 from zapzap.controllers.DownloadCompleteWidget import DownloadCompleteWidget
 from zapzap.controllers.DownloadToaster import DownloadToaster
@@ -125,10 +126,17 @@ class DownloadManager:
         if not os.path.exists(file_path):
             return
 
-        widget = DownloadCompleteWidget(file_path, parent)
-        DownloadManager._completion_widgets.append(widget)
-        widget.destroyed.connect(
-            lambda *_: DownloadManager._completion_widgets.remove(widget)
-            if widget in DownloadManager._completion_widgets else None
-        )
-        widget.show()
+        widget_parent = parent.window() if parent and parent.window() else parent
+
+        def show_widget():
+            widget = DownloadCompleteWidget(file_path, widget_parent)
+            DownloadManager._completion_widgets.append(widget)
+            widget.destroyed.connect(
+                lambda *_: DownloadManager._completion_widgets.remove(widget)
+                if widget in DownloadManager._completion_widgets else None
+            )
+            widget.show()
+            widget.raise_()
+            widget.activateWindow()
+
+        QTimer.singleShot(0, show_widget)

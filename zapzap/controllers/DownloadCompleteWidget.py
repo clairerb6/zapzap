@@ -97,8 +97,6 @@ class DownloadCompleteWidget(QWidget):
     def eventFilter(self, source, event):
         if source == self.parent() and event.type() == QtCore.QEvent.Type.Resize:
             self._reposition()
-        elif source == self.parent() and event.type() == QtCore.QEvent.Type.WindowDeactivate:
-            self.close()
         return super().eventFilter(source, event)
 
     def focusOutEvent(self, event):
