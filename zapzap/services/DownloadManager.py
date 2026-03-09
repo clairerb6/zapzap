@@ -3,6 +3,7 @@ from PyQt6.QtCore import QStandardPaths
 from gettext import gettext as _
 from zapzap.services.SettingsManager import SettingsManager
 from PyQt6.QtWidgets import QFileDialog
+from zapzap.controllers.DownloadCompleteWidget import DownloadCompleteWidget
 from zapzap.controllers.DownloadToaster import DownloadToaster
 import os
 import shutil
@@ -12,6 +13,7 @@ class DownloadManager:
     DOWNLOAD_PATH = QStandardPaths.writableLocation(
         QStandardPaths.StandardLocation.DownloadLocation
     )
+    _completion_widgets = []
 
     @staticmethod
     def set_path(new_path):
@@ -53,6 +55,8 @@ class DownloadManager:
                     parent.page().show_toast(_("Download canceled"), 1600)
                 except Exception:
                     pass
+            elif state == QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
+                DownloadManager._show_download_complete_widget(download, parent)
 
         download.stateChanged.connect(on_state_changed)
 
@@ -114,3 +118,20 @@ class DownloadManager:
         )
 
         return folder_path or None
+
+    @staticmethod
+    def _show_download_complete_widget(download, parent):
+        file_path = os.path.join(
+            download.downloadDirectory(),
+            download.downloadFileName()
+        )
+        if not os.path.exists(file_path):
+            return
+
+        widget = DownloadCompleteWidget(file_path, parent)
+        DownloadManager._completion_widgets.append(widget)
+        widget.destroyed.connect(
+            lambda *_: DownloadManager._completion_widgets.remove(widget)
+            if widget in DownloadManager._completion_widgets else None
+        )
+        widget.show()
