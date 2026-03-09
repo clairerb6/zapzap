@@ -1,5 +1,5 @@
 from PyQt6 import QtCore, QtWidgets
-from PyQt6.QtCore import QUrl
+from PyQt6.QtCore import QProcess, QUrl
 from PyQt6.QtGui import QDesktopServices, QIcon
 from PyQt6.QtWidgets import (
     QFrame,
@@ -90,7 +90,7 @@ class DownloadCompleteWidget(QWidget):
         geo = self.frameGeometry()
         geo.moveBottomLeft(
             self.parent().mapToGlobal(rect.bottomLeft()) +
-            QtCore.QPoint(self.margin + 65, -self.margin)
+            QtCore.QPoint(self.margin, -self.margin)
         )
         self.setGeometry(geo)
 
@@ -110,11 +110,16 @@ class DownloadCompleteWidget(QWidget):
 
     def _open_file(self):
         if os.path.exists(self.file_path):
-            QDesktopServices.openUrl(QUrl.fromLocalFile(self.file_path))
+            self._open_local_path(self.file_path)
         self.close()
 
     def _open_folder(self):
         directory = os.path.dirname(self.file_path)
         if os.path.isdir(directory):
-            QDesktopServices.openUrl(QUrl.fromLocalFile(directory))
+            self._open_local_path(directory)
         self.close()
+
+    def _open_local_path(self, path: str):
+        if QDesktopServices.openUrl(QUrl.fromLocalFile(path)):
+            return
+        QProcess.startDetached("xdg-open", [path])

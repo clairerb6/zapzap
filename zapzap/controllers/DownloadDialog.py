@@ -16,7 +16,7 @@ import os
 from zapzap.services.SettingsManager import SettingsManager
 
 
-class DownloadToaster(QDialog):
+class DownloadDialog(QDialog):
     ACTION_CANCEL = "cancel"
     ACTION_DOWNLOAD = "download"
     ACTION_SAVE_AS = "save_as"

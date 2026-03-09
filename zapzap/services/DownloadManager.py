@@ -5,7 +5,7 @@ from zapzap.services.SettingsManager import SettingsManager
 from PyQt6.QtCore import QTimer
 from PyQt6.QtWidgets import QFileDialog
 from zapzap.controllers.DownloadCompleteWidget import DownloadCompleteWidget
-from zapzap.controllers.DownloadToaster import DownloadToaster
+from zapzap.controllers.DownloadDialog import DownloadDialog
 import os
 import shutil
 
@@ -58,7 +58,7 @@ class DownloadManager:
 
         download.stateChanged.connect(on_state_changed)
 
-        dialog = DownloadToaster(
+        dialog = DownloadDialog(
             download.downloadFileName(),
             download.downloadDirectory(),
             parent
@@ -70,11 +70,11 @@ class DownloadManager:
             return
 
         action = dialog.selected_action
-        if action == DownloadToaster.ACTION_CANCEL:
+        if action == DownloadDialog.ACTION_CANCEL:
             download.cancel()
             return
 
-        if action == DownloadToaster.ACTION_SAVE_AS and dialog.selected_path:
+        if action == DownloadDialog.ACTION_SAVE_AS and dialog.selected_path:
             requested_dir = os.path.dirname(dialog.selected_path)
             requested_name = os.path.basename(dialog.selected_path)
             download.setDownloadDirectory(requested_dir)
