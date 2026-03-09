@@ -1,7 +1,5 @@
 from PyQt6.QtWebEngineCore import QWebEngineDownloadRequest
 from PyQt6.QtCore import QStandardPaths
-from PyQt6.QtGui import QDesktopServices
-from PyQt6.QtCore import QUrl
 from gettext import gettext as _
 from zapzap.services.SettingsManager import SettingsManager
 from PyQt6.QtWidgets import QFileDialog
@@ -96,15 +94,6 @@ class DownloadManager:
 
                 download.stateChanged.connect(move_when_done)
 
-        if action == DownloadToaster.ACTION_OPEN:
-            download.stateChanged.connect(
-                lambda state: DownloadManager._open_when_done(download, state)
-            )
-        elif action == DownloadToaster.ACTION_OPEN_FOLDER:
-            download.stateChanged.connect(
-                lambda state: DownloadManager._open_folder_when_done(download, state)
-            )
-
         download.accept()
 
     @staticmethod
@@ -125,22 +114,3 @@ class DownloadManager:
         )
 
         return folder_path or None
-
-    @staticmethod
-    def _open_when_done(download, state):
-        if state != QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
-            return
-        path = os.path.join(
-            download.downloadDirectory(),
-            download.downloadFileName()
-        )
-        if os.path.exists(path):
-            QDesktopServices.openUrl(QUrl.fromLocalFile(path))
-
-    @staticmethod
-    def _open_folder_when_done(download, state):
-        if state != QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
-            return
-        directory = download.downloadDirectory()
-        if os.path.isdir(directory):
-            QDesktopServices.openUrl(QUrl.fromLocalFile(directory))

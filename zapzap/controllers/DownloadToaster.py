@@ -18,8 +18,7 @@ from zapzap.services.SettingsManager import SettingsManager
 
 class DownloadToaster(QDialog):
     ACTION_CANCEL = "cancel"
-    ACTION_OPEN = "open"
-    ACTION_OPEN_FOLDER = "open_folder"
+    ACTION_DOWNLOAD = "download"
     ACTION_SAVE_AS = "save_as"
 
     def __init__(self, file_name: str, directory: str, parent=None):
@@ -39,21 +38,15 @@ class DownloadToaster(QDialog):
         container = QFrame(self)
         container.setFrameShape(QFrame.Shape.NoFrame)
 
-        message = QLabel(_("Choose what to do with this download."))
+        message = QLabel(_("The file will only be downloaded after you confirm."))
         message.setWordWrap(True)
 
         title = QLabel(self.file_name)
         title.setWordWrap(True)
 
-        open_btn = QPushButton(_("Open"))
-        open_btn.setIcon(QIcon.fromTheme("document-open"))
-        open_btn.clicked.connect(lambda: self._select_action(self.ACTION_OPEN))
-
-        folder_btn = QPushButton(_("Open folder"))
-        folder_btn.setIcon(QIcon.fromTheme("folder-open"))
-        folder_btn.clicked.connect(
-            lambda: self._select_action(self.ACTION_OPEN_FOLDER)
-        )
+        download_btn = QPushButton(_("Download"))
+        download_btn.setIcon(QIcon.fromTheme("download"))
+        download_btn.clicked.connect(lambda: self._select_action(self.ACTION_DOWNLOAD))
 
         save_as_btn = QPushButton(_("Save as"))
         save_as_btn.setIcon(QIcon.fromTheme("document-save-as"))
@@ -67,8 +60,7 @@ class DownloadToaster(QDialog):
 
         buttons = QHBoxLayout()
         buttons.setSpacing(6)
-        buttons.addWidget(open_btn)
-        buttons.addWidget(folder_btn)
+        buttons.addWidget(download_btn)
         buttons.addWidget(save_as_btn)
         buttons.addWidget(cancel_btn)
 
