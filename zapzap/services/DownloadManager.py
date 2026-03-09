@@ -50,12 +50,9 @@ class DownloadManager:
                 QWebEngineDownloadRequest.DownloadState.DownloadCancelled,
                 QWebEngineDownloadRequest.DownloadState.DownloadInterrupted
             )
-            if state in cancelled and parent and hasattr(parent, "page") and parent.page():
-                try:
-                    parent.page().show_toast(_("Download canceled"), 1600)
-                except Exception:
-                    pass
-            elif state == QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
+            if state in cancelled:
+                return
+            if state == QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
                 DownloadManager._show_download_complete_widget(download, parent)
 
         download.stateChanged.connect(on_state_changed)
