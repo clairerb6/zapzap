@@ -1,19 +1,19 @@
 from PyQt6.QtWebEngineCore import QWebEngineDownloadRequest
 from PyQt6.QtCore import QStandardPaths
+from PyQt6.QtGui import QDesktopServices
+from PyQt6.QtCore import QUrl
 from gettext import gettext as _
 from zapzap.services.SettingsManager import SettingsManager
 from PyQt6.QtWidgets import QFileDialog
-
 from zapzap.controllers.DownloadToaster import DownloadToaster
-from gettext import gettext as _
+import os
+import shutil
 
 
 class DownloadManager:
     DOWNLOAD_PATH = QStandardPaths.writableLocation(
         QStandardPaths.StandardLocation.DownloadLocation
     )
-
-    _floating_cards = []
 
     @staticmethod
     def set_path(new_path):
@@ -45,11 +45,6 @@ class DownloadManager:
             DownloadManager.get_path()
         )
 
-        # QtWebEngine destroys non-accepted requests after this callback returns.
-        # Accept first to keep the request alive, then pause until user action.
-        download.accept()
-        download.pause()
-
         def on_state_changed(state):
             cancelled = (
                 QWebEngineDownloadRequest.DownloadState.DownloadCancelled,
@@ -63,13 +58,54 @@ class DownloadManager:
 
         download.stateChanged.connect(on_state_changed)
 
-        toaster = DownloadToaster(download, parent)
-        DownloadManager._floating_cards.append(toaster)
-        toaster.destroyed.connect(
-            lambda *_: DownloadManager._floating_cards.remove(toaster)
-            if toaster in DownloadManager._floating_cards else None
+        dialog = DownloadToaster(
+            download.downloadFileName(),
+            download.downloadDirectory(),
+            parent
         )
-        toaster.open()
+        result = dialog.exec()
+
+        if result != dialog.DialogCode.Accepted:
+            download.cancel()
+            return
+
+        action = dialog.selected_action
+        if action == DownloadToaster.ACTION_CANCEL:
+            download.cancel()
+            return
+
+        if action == DownloadToaster.ACTION_SAVE_AS and dialog.selected_path:
+            requested_dir = os.path.dirname(dialog.selected_path)
+            requested_name = os.path.basename(dialog.selected_path)
+            download.setDownloadDirectory(requested_dir)
+            download.setDownloadFileName(requested_name)
+
+            current_dir = download.downloadDirectory()
+            current_name = download.downloadFileName()
+            if current_dir != requested_dir or current_name != requested_name:
+                def move_when_done(state):
+                    if state != QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
+                        return
+                    try:
+                        source = os.path.join(current_dir, current_name)
+                        if os.path.exists(source):
+                            os.makedirs(requested_dir, exist_ok=True)
+                            shutil.move(source, dialog.selected_path)
+                    except Exception:
+                        pass
+
+                download.stateChanged.connect(move_when_done)
+
+        if action == DownloadToaster.ACTION_OPEN:
+            download.stateChanged.connect(
+                lambda state: DownloadManager._open_when_done(download, state)
+            )
+        elif action == DownloadToaster.ACTION_OPEN_FOLDER:
+            download.stateChanged.connect(
+                lambda state: DownloadManager._open_folder_when_done(download, state)
+            )
+
+        download.accept()
 
     @staticmethod
     def open_folder_dialog(parent):
@@ -89,3 +125,22 @@ class DownloadManager:
         )
 
         return folder_path or None
+
+    @staticmethod
+    def _open_when_done(download, state):
+        if state != QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
+            return
+        path = os.path.join(
+            download.downloadDirectory(),
+            download.downloadFileName()
+        )
+        if os.path.exists(path):
+            QDesktopServices.openUrl(QUrl.fromLocalFile(path))
+
+    @staticmethod
+    def _open_folder_when_done(download, state):
+        if state != QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
+            return
+        directory = download.downloadDirectory()
+        if os.path.isdir(directory):
+            QDesktopServices.openUrl(QUrl.fromLocalFile(directory))
