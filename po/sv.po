@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZapZap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-01 04:14-0300\n"
+"POT-Creation-Date: 2026-03-07 21:55-0300\n"
 "PO-Revision-Date: 2026-02-11 21:44+0100\n"
 "Last-Translator: Dennis Cederberg "
 "<9393069+cederberget@users.noreply.github.com>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: zapzap/views/ui_browser.py:91 zapzap/views/ui_page_account.py:87
-#: zapzap/controllers/ShortcutsDialog.py:58 zapzap/controllers/Browser.py:153
+#: zapzap/controllers/ShortcutsDialog.py:58 zapzap/controllers/Browser.py:192
 msgid "New account"
 msgstr "Nytt konto"
 
@@ -1220,6 +1220,54 @@ msgid ""
 "to safe default values."
 msgstr ""
 
+#: zapzap/controllers/PageGeneral.py:47
+msgid ""
+"<b>Flatpak tip:</b> If opening PDFs, drag-and-drop, or file uploads fail, "
+"this is usually caused by sandbox permissions. Open <b>Flatseal</b> and "
+"grant ZapZap access to folders like Documents, Downloads, Pictures and "
+"Videos. You can also run: <code>flatpak override --user --filesystem=home "
+"com.rtosta.zapzap</code>."
+msgstr ""
+
+#: zapzap/controllers/PageGeneral.py:63
+msgid "Select and copy this command in your terminal"
+msgstr ""
+
+#: zapzap/controllers/PageGeneral.py:64 zapzap/controllers/Browser.py:84
+#, fuzzy
+msgid "Copy command"
+msgstr "Kopiera bild"
+
+#: zapzap/controllers/PageGeneral.py:72
+msgid "Open Flatseal page"
+msgstr ""
+
+#: zapzap/controllers/Browser.py:66
+msgid "Flatpak sandbox help"
+msgstr ""
+
+#: zapzap/controllers/Browser.py:75
+msgid "Flatpak sandbox"
+msgstr ""
+
+#: zapzap/controllers/Browser.py:76
+msgid "ZapZap is running in Flatpak sandbox."
+msgstr ""
+
+#: zapzap/controllers/Browser.py:79
+msgid ""
+"Some features like opening files or drag-and-drop may require additional "
+"permissions."
+msgstr ""
+
+#: zapzap/controllers/Browser.py:83
+msgid "Instructions"
+msgstr ""
+
+#: zapzap/controllers/Browser.py:85
+msgid "Close"
+msgstr ""
+
 # Identical to source
 #: zapzap/services/AlertManager.py:35
 msgid "Information"
@@ -1318,9 +1366,6 @@ msgstr "Välj katalog"
 
 #~ msgid "Select all"
 #~ msgstr "Markera allt"
-
-#~ msgid "Copy image"
-#~ msgstr "Kopiera bild"
 
 #~ msgid "Copy link address"
 #~ msgstr "Kopiera länkadress"
