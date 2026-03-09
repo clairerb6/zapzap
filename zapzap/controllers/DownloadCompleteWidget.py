@@ -18,6 +18,10 @@ class DownloadCompleteWidget(QWidget):
         super().__init__(parent)
         self.file_path = file_path
         self.margin = 10
+        self.setWindowFlags(
+            QtCore.Qt.WindowType.Popup | QtCore.Qt.WindowType.FramelessWindowHint
+        )
+        self.setAttribute(QtCore.Qt.WidgetAttribute.WA_DeleteOnClose, True)
 
         self.setFocus()
         self.setFocusPolicy(QtCore.Qt.FocusPolicy.ClickFocus)
@@ -81,9 +85,10 @@ class DownloadCompleteWidget(QWidget):
             return
 
         rect = self.parent().rect()
-        geo = self.geometry()
+        geo = self.frameGeometry()
         geo.moveBottomLeft(
-            rect.bottomLeft() + QtCore.QPoint(self.margin + 65, -self.margin)
+            self.parent().mapToGlobal(rect.bottomLeft()) +
+            QtCore.QPoint(self.margin + 65, -self.margin)
         )
         self.setGeometry(geo)
 
