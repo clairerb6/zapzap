@@ -18,12 +18,9 @@ class DownloadCompleteWidget(QWidget):
         super().__init__(parent)
         self.file_path = file_path
         self.margin = 10
-        self.setWindowFlags(
-            QtCore.Qt.WindowType.Tool |
-            QtCore.Qt.WindowType.FramelessWindowHint |
-            QtCore.Qt.WindowType.WindowStaysOnTopHint
-        )
+        self.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_DeleteOnClose, True)
+        self.setAttribute(QtCore.Qt.WidgetAttribute.WA_ShowWithoutActivating, True)
 
         self.setFocus()
         self.setFocusPolicy(QtCore.Qt.FocusPolicy.ClickFocus)
@@ -86,21 +83,20 @@ class DownloadCompleteWidget(QWidget):
             return
 
         rect = self.parent().rect()
-        geo = self.frameGeometry()
+        geo = self.geometry()
         geo.moveBottomLeft(
-            self.parent().mapToGlobal(rect.bottomLeft()) +
-            QtCore.QPoint(self.margin, -self.margin)
+            rect.bottomLeft() + QtCore.QPoint(self.margin, -self.margin)
         )
         self.setGeometry(geo)
 
     def eventFilter(self, source, event):
         if source == self.parent() and event.type() == QtCore.QEvent.Type.Resize:
             self._reposition()
-        elif (
-            source == QtWidgets.QApplication.instance()
-            and event.type() == QtCore.QEvent.Type.MouseButtonPress
-        ):
-            global_pos = event.globalPosition().toPoint()
+        elif event.type() == QtCore.QEvent.Type.MouseButtonPress:
+            if hasattr(event, "globalPosition"):
+                global_pos = event.globalPosition().toPoint()
+            else:
+                global_pos = event.globalPos()
             if self.isVisible() and not self.frameGeometry().contains(global_pos):
                 self.close()
         return super().eventFilter(source, event)
@@ -117,7 +113,6 @@ class DownloadCompleteWidget(QWidget):
         super().showEvent(event)
         self._reposition()
         self.raise_()
-        self.activateWindow()
 
     def _open_file(self):
         if os.path.exists(self.file_path):

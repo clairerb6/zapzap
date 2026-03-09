@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-07 21:55-0300\n"
+"POT-Creation-Date: 2026-03-09 15:41-0300\n"
 "PO-Revision-Date: 2025-11-11 11:40+0200\n"
 "Last-Translator: F. András <erfan659-2 at yahoo dot com>\n"
 "Language-Team: Hungarian\n"
@@ -388,7 +388,7 @@ msgstr ""
 #: zapzap/views/ui_page_customizations.py:259
 #: zapzap/views/ui_page_customizations.py:273
 #: zapzap/controllers/DialogDumpHandler.py:50
-#: zapzap/controllers/DownloadToaster.py:61
+#: zapzap/controllers/DownloadCompleteWidget.py:52
 #, fuzzy
 msgid "Open folder"
 msgstr "Mappa kiválasztása"
@@ -717,10 +717,6 @@ msgstr "Hivatalos kiadás"
 msgid "Unofficial"
 msgstr "Nem hivatalos"
 
-#: zapzap/controllers/PageAbout.py:25
-msgid "Unknown"
-msgstr "Ismeretlen"
-
 #: zapzap/controllers/ShortcutsDialog.py:11
 msgid "Mark as unread"
 msgstr "Olvasatlannak jelölés"
@@ -846,31 +842,6 @@ msgid ""
 " - Issue tracker: {issue_url}\n"
 " - Email: {email}"
 msgstr ""
-
-#: zapzap/controllers/PageGeneral.py:38
-msgid "Use Flatseal to change this mode of execution"
-msgstr "Flatseal használata ezen futtatási mód megváltoztatásához"
-
-#: zapzap/controllers/Browser.py:164 zapzap/controllers/Browser.py:192
-msgid "Account {}"
-msgstr "Fiók: {}"
-
-#: zapzap/controllers/DownloadToaster.py:58
-msgid "Open"
-msgstr "Megnyitás"
-
-#: zapzap/controllers/DownloadToaster.py:64
-#, fuzzy
-msgid "Save as"
-msgstr "Mentés"
-
-#: zapzap/controllers/DownloadToaster.py:67
-msgid "Cancel"
-msgstr ""
-
-#: zapzap/controllers/DownloadToaster.py:183
-msgid "Save file"
-msgstr "Fájl mentése"
 
 #: zapzap/controllers/PageCustomizations.py:52
 msgid "Global"
@@ -1187,28 +1158,6 @@ msgid ""
 "to safe default values."
 msgstr ""
 
-#: zapzap/controllers/PageGeneral.py:47
-msgid ""
-"<b>Flatpak tip:</b> If opening PDFs, drag-and-drop, or file uploads fail, "
-"this is usually caused by sandbox permissions. Open <b>Flatseal</b> and "
-"grant ZapZap access to folders like Documents, Downloads, Pictures and "
-"Videos. You can also run: <code>flatpak override --user --filesystem=home "
-"com.rtosta.zapzap</code>."
-msgstr ""
-
-#: zapzap/controllers/PageGeneral.py:63
-msgid "Select and copy this command in your terminal"
-msgstr ""
-
-#: zapzap/controllers/PageGeneral.py:64 zapzap/controllers/Browser.py:84
-#, fuzzy
-msgid "Copy command"
-msgstr "Kép másolása"
-
-#: zapzap/controllers/PageGeneral.py:72
-msgid "Open Flatseal page"
-msgstr ""
-
 #: zapzap/controllers/Browser.py:66
 msgid "Flatpak sandbox help"
 msgstr ""
@@ -1232,9 +1181,66 @@ msgstr ""
 msgid "Instructions"
 msgstr "Tájékoztatás"
 
+#: zapzap/controllers/Browser.py:84 zapzap/controllers/PageGeneral.py:64
+#, fuzzy
+msgid "Copy command"
+msgstr "Kép másolása"
+
 #: zapzap/controllers/Browser.py:85
 msgid "Close"
 msgstr ""
+
+#: zapzap/controllers/Browser.py:203 zapzap/controllers/Browser.py:231
+msgid "Account {}"
+msgstr "Fiók: {}"
+
+#: zapzap/controllers/PageGeneral.py:40
+msgid "Use Flatseal to change this mode of execution"
+msgstr "Flatseal használata ezen futtatási mód megváltoztatásához"
+
+#: zapzap/controllers/PageGeneral.py:47
+msgid ""
+"<b>Flatpak tip:</b> If opening PDFs, drag-and-drop, or file uploads fail, "
+"this is usually caused by sandbox permissions. Open <b>Flatseal</b> and "
+"grant ZapZap access to folders like Documents, Downloads, Pictures and "
+"Videos. You can also run: <code>flatpak override --user --filesystem=home "
+"com.rtosta.zapzap</code>."
+msgstr ""
+
+#: zapzap/controllers/PageGeneral.py:63
+msgid "Select and copy this command in your terminal"
+msgstr ""
+
+#: zapzap/controllers/PageGeneral.py:72
+msgid "Open Flatseal page"
+msgstr ""
+
+#: zapzap/controllers/DownloadCompleteWidget.py:48
+msgid "Open"
+msgstr "Megnyitás"
+
+#: zapzap/controllers/DownloadDialog.py:32
+#: zapzap/controllers/DownloadDialog.py:51
+#, fuzzy
+msgid "Download"
+msgstr "Letöltési mappa"
+
+#: zapzap/controllers/DownloadDialog.py:43
+msgid "The file will only be downloaded after you confirm."
+msgstr ""
+
+#: zapzap/controllers/DownloadDialog.py:55
+#, fuzzy
+msgid "Save as"
+msgstr "Mentés"
+
+#: zapzap/controllers/DownloadDialog.py:59
+msgid "Cancel"
+msgstr ""
+
+#: zapzap/controllers/DownloadDialog.py:123
+msgid "Save file"
+msgstr "Fájl mentése"
 
 #: zapzap/services/AlertManager.py:35
 msgid "Information"
@@ -1288,14 +1294,13 @@ msgstr "Mutasd"
 msgid "Donation"
 msgstr "Adomány"
 
-#: zapzap/services/DownloadManager.py:60
-msgid "Download canceled"
-msgstr ""
-
-#: zapzap/services/DownloadManager.py:81
+#: zapzap/services/DownloadManager.py:113
 #, fuzzy
 msgid "Select folder"
 msgstr "Mappa kiválasztása"
+
+#~ msgid "Unknown"
+#~ msgstr "Ismeretlen"
 
 #~ msgid "Cache Behavior"
 #~ msgstr "Gyorsítótár viselkedése"

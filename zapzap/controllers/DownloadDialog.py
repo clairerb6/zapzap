@@ -31,18 +31,22 @@ class DownloadDialog(QDialog):
         self.setModal(True)
         self.setWindowTitle(_("Download"))
         self.setWindowFlag(self.windowFlags() & ~self.windowFlags().WindowContextHelpButtonHint)
+        self.setMinimumWidth(360)
 
         self._build_ui()
 
     def _build_ui(self):
         container = QFrame(self)
         container.setFrameShape(QFrame.Shape.NoFrame)
+        container.setObjectName("container")
 
         message = QLabel(_("The file will only be downloaded after you confirm."))
         message.setWordWrap(True)
+        message.setObjectName("message")
 
         title = QLabel(self.file_name)
         title.setWordWrap(True)
+        title.setObjectName("title")
 
         download_btn = QPushButton(_("Download"))
         download_btn.setIcon(QIcon.fromTheme("download"))
@@ -76,11 +80,28 @@ class DownloadDialog(QDialog):
 
         container.setStyleSheet(
             """
-            QFrame {
+            QFrame#container {
                 background-color: palette(window);
                 border: 1px solid palette(mid);
                 border-radius: 8px;
-                padding: 10px;
+                padding: 12px;
+            }
+            QLabel#message {
+                border: none;
+                background: transparent;
+                padding: 0;
+                color: palette(text);
+            }
+            QLabel#title {
+                border: none;
+                background: transparent;
+                padding: 0;
+                font-weight: 600;
+                color: palette(text);
+            }
+            QPushButton {
+                min-height: 30px;
+                padding: 4px 10px;
             }
             """
         )

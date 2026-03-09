@@ -45,6 +45,7 @@ class DownloadManager:
         download.setDownloadDirectory(
             DownloadManager.get_path()
         )
+        DownloadManager._set_web_toast_hidden(parent, True)
 
         def on_state_changed(state):
             cancelled = (
@@ -52,9 +53,9 @@ class DownloadManager:
                 QWebEngineDownloadRequest.DownloadState.DownloadInterrupted
             )
             if state in cancelled:
+                DownloadManager._set_web_toast_hidden(parent, False)
                 return
             if state == QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
-                DownloadManager._dismiss_web_download_toast(download, parent)
                 DownloadManager._show_download_complete_widget(download, parent)
 
         download.stateChanged.connect(on_state_changed)
@@ -67,11 +68,13 @@ class DownloadManager:
         result = dialog.exec()
 
         if result != dialog.DialogCode.Accepted:
+            DownloadManager._set_web_toast_hidden(parent, False)
             download.cancel()
             return
 
         action = dialog.selected_action
         if action == DownloadDialog.ACTION_CANCEL:
+            DownloadManager._set_web_toast_hidden(parent, False)
             download.cancel()
             return
 
@@ -125,6 +128,7 @@ class DownloadManager:
             download.downloadFileName()
         )
         if not os.path.exists(file_path):
+            DownloadManager._set_web_toast_hidden(parent, False)
             return
 
         widget_parent = parent.window() if parent and parent.window() else parent
@@ -136,35 +140,50 @@ class DownloadManager:
                 lambda *_: DownloadManager._completion_widgets.remove(widget)
                 if widget in DownloadManager._completion_widgets else None
             )
+            widget.destroyed.connect(
+                lambda *_: DownloadManager._set_web_toast_hidden(parent, False)
+            )
             widget.show()
             widget.raise_()
-            widget.activateWindow()
 
         QTimer.singleShot(0, show_widget)
 
     @staticmethod
-    def _dismiss_web_download_toast(download, parent):
+    def _set_web_toast_hidden(parent, hidden: bool):
         if not parent or not hasattr(parent, "page") or not parent.page():
             return
 
-        file_name = download.downloadFileName().replace("\\", "\\\\").replace("'", "\\'")
-        script = f"""
-        (function() {{
-            const fileName = '{file_name}';
-            const candidates = Array.from(document.querySelectorAll('div, span'));
-            for (const node of candidates) {{
-                const text = (node.innerText || node.textContent || '').trim();
-                if (!text) continue;
-                const style = window.getComputedStyle(node);
-                const looksLikeToast = style.position === 'fixed' || style.position === 'absolute';
-                const mentionsDownload = text.includes(fileName) || /descarg|download|baixad|scaricat|baixado/i.test(text);
-                if (looksLikeToast && mentionsDownload) {{
-                    node.remove();
-                }}
-            }}
-        }})();
-        """
+        page = parent.page()
+        count = page.property("zapzapHiddenToastCount") or 0
+
+        if hidden:
+            count += 1
+            page.setProperty("zapzapHiddenToastCount", count)
+            if count > 1:
+                return
+            script = """
+            (function() {
+              const styleId = 'zapzap-hide-wds-toast';
+              if (document.getElementById(styleId)) return;
+              const style = document.createElement('style');
+              style.id = styleId;
+              style.textContent = '#wds-toast-container { display: none !important; }';
+              document.head.appendChild(style);
+            })();
+            """
+        else:
+            count = max(0, count - 1)
+            page.setProperty("zapzapHiddenToastCount", count)
+            if count > 0:
+                return
+            script = """
+            (function() {
+              const style = document.getElementById('zapzap-hide-wds-toast');
+              if (style) style.remove();
+            })();
+            """
+
         try:
-            parent.page().runJavaScript(script)
+            page.runJavaScript(script)
         except Exception:
             pass

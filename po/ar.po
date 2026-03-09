@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unnamed project\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-07 21:55-0300\n"
+"POT-Creation-Date: 2026-03-09 15:41-0300\n"
 "PO-Revision-Date: 2026-02-02 23:52+0200\n"
 "Last-Translator: Muhammed Al-Basha <contact.mu7basha@gmail.com>\n"
 "Language-Team: Arabic\n"
@@ -392,7 +392,7 @@ msgstr ""
 #: zapzap/views/ui_page_customizations.py:259
 #: zapzap/views/ui_page_customizations.py:273
 #: zapzap/controllers/DialogDumpHandler.py:50
-#: zapzap/controllers/DownloadToaster.py:61
+#: zapzap/controllers/DownloadCompleteWidget.py:52
 #, fuzzy
 msgid "Open folder"
 msgstr "اختر مجلد"
@@ -721,10 +721,6 @@ msgstr "التصريف الرسمي"
 msgid "Unofficial"
 msgstr "غير رسمي"
 
-#: zapzap/controllers/PageAbout.py:25
-msgid "Unknown"
-msgstr "مجهول"
-
 #: zapzap/controllers/ShortcutsDialog.py:11
 msgid "Mark as unread"
 msgstr "علِّم كغير مقروء"
@@ -850,31 +846,6 @@ msgid ""
 " - Issue tracker: {issue_url}\n"
 " - Email: {email}"
 msgstr ""
-
-#: zapzap/controllers/PageGeneral.py:38
-msgid "Use Flatseal to change this mode of execution"
-msgstr "استعمل فلاتسييل لتغيير وضع التنفيذ"
-
-#: zapzap/controllers/Browser.py:164 zapzap/controllers/Browser.py:192
-msgid "Account {}"
-msgstr "حساب {}"
-
-#: zapzap/controllers/DownloadToaster.py:58
-msgid "Open"
-msgstr "افتح"
-
-#: zapzap/controllers/DownloadToaster.py:64
-#, fuzzy
-msgid "Save as"
-msgstr "احفظ"
-
-#: zapzap/controllers/DownloadToaster.py:67
-msgid "Cancel"
-msgstr ""
-
-#: zapzap/controllers/DownloadToaster.py:183
-msgid "Save file"
-msgstr "احفظ الملف"
 
 #: zapzap/controllers/PageCustomizations.py:52
 msgid "Global"
@@ -1192,28 +1163,6 @@ msgid ""
 "to safe default values."
 msgstr ""
 
-#: zapzap/controllers/PageGeneral.py:47
-msgid ""
-"<b>Flatpak tip:</b> If opening PDFs, drag-and-drop, or file uploads fail, "
-"this is usually caused by sandbox permissions. Open <b>Flatseal</b> and "
-"grant ZapZap access to folders like Documents, Downloads, Pictures and "
-"Videos. You can also run: <code>flatpak override --user --filesystem=home "
-"com.rtosta.zapzap</code>."
-msgstr ""
-
-#: zapzap/controllers/PageGeneral.py:63
-msgid "Select and copy this command in your terminal"
-msgstr ""
-
-#: zapzap/controllers/PageGeneral.py:64 zapzap/controllers/Browser.py:84
-#, fuzzy
-msgid "Copy command"
-msgstr "انسخ الصورة"
-
-#: zapzap/controllers/PageGeneral.py:72
-msgid "Open Flatseal page"
-msgstr ""
-
 #: zapzap/controllers/Browser.py:66
 msgid "Flatpak sandbox help"
 msgstr ""
@@ -1237,9 +1186,66 @@ msgstr ""
 msgid "Instructions"
 msgstr "معلومات"
 
+#: zapzap/controllers/Browser.py:84 zapzap/controllers/PageGeneral.py:64
+#, fuzzy
+msgid "Copy command"
+msgstr "انسخ الصورة"
+
 #: zapzap/controllers/Browser.py:85
 msgid "Close"
 msgstr ""
+
+#: zapzap/controllers/Browser.py:203 zapzap/controllers/Browser.py:231
+msgid "Account {}"
+msgstr "حساب {}"
+
+#: zapzap/controllers/PageGeneral.py:40
+msgid "Use Flatseal to change this mode of execution"
+msgstr "استعمل فلاتسييل لتغيير وضع التنفيذ"
+
+#: zapzap/controllers/PageGeneral.py:47
+msgid ""
+"<b>Flatpak tip:</b> If opening PDFs, drag-and-drop, or file uploads fail, "
+"this is usually caused by sandbox permissions. Open <b>Flatseal</b> and "
+"grant ZapZap access to folders like Documents, Downloads, Pictures and "
+"Videos. You can also run: <code>flatpak override --user --filesystem=home "
+"com.rtosta.zapzap</code>."
+msgstr ""
+
+#: zapzap/controllers/PageGeneral.py:63
+msgid "Select and copy this command in your terminal"
+msgstr ""
+
+#: zapzap/controllers/PageGeneral.py:72
+msgid "Open Flatseal page"
+msgstr ""
+
+#: zapzap/controllers/DownloadCompleteWidget.py:48
+msgid "Open"
+msgstr "افتح"
+
+#: zapzap/controllers/DownloadDialog.py:32
+#: zapzap/controllers/DownloadDialog.py:51
+#, fuzzy
+msgid "Download"
+msgstr "مسار التحميل"
+
+#: zapzap/controllers/DownloadDialog.py:43
+msgid "The file will only be downloaded after you confirm."
+msgstr ""
+
+#: zapzap/controllers/DownloadDialog.py:55
+#, fuzzy
+msgid "Save as"
+msgstr "احفظ"
+
+#: zapzap/controllers/DownloadDialog.py:59
+msgid "Cancel"
+msgstr ""
+
+#: zapzap/controllers/DownloadDialog.py:123
+msgid "Save file"
+msgstr "احفظ الملف"
 
 #: zapzap/services/AlertManager.py:35
 msgid "Information"
@@ -1293,14 +1299,13 @@ msgstr "اظهِر"
 msgid "Donation"
 msgstr "تبرَّع"
 
-#: zapzap/services/DownloadManager.py:60
-msgid "Download canceled"
-msgstr ""
-
-#: zapzap/services/DownloadManager.py:81
+#: zapzap/services/DownloadManager.py:113
 #, fuzzy
 msgid "Select folder"
 msgstr "اختر مجلد"
+
+#~ msgid "Unknown"
+#~ msgstr "مجهول"
 
 #~ msgid "Cache Behavior"
 #~ msgstr "سلوك الذاكرة المؤقتة"
