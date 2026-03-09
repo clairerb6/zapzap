@@ -26,6 +26,8 @@ class DownloadToaster(QWidget):
         self.margin = 10
         self._cancelled = False
         self._download_started = False
+        self._open_file_after_download = False
+        self._open_folder_after_download = False
 
         self.setFocus()
         self.setFocusPolicy(QtCore.Qt.FocusPolicy.ClickFocus)
@@ -36,6 +38,7 @@ class DownloadToaster(QWidget):
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_DeleteOnClose, True)
 
         self._build_ui()
+        self.download.stateChanged.connect(self._handle_download_state_changed)
 
         if self.parent():
             self.parent().installEventFilter(self)
@@ -141,29 +144,25 @@ class DownloadToaster(QWidget):
 
     def _open_file(self):
         try:
-            directory = self.download.downloadDirectory()
-            self._resume_download()
+            if self._is_download_completed():
+                self._open_downloaded_file()
+                self.close()
+            else:
+                self._open_file_after_download = True
+                self._resume_download()
         except RuntimeError:
             return
-
-        def open_when_done(state):
-            if state == QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
-                path = os.path.join(
-                    directory,
-                    self.download.downloadFileName()
-                )
-                QDesktopServices.openUrl(QUrl.fromLocalFile(path))
-
-        self.download.stateChanged.connect(open_when_done)
 
     def _open_folder(self):
         try:
-            directory = self.download.downloadDirectory()
-            self._resume_download()
+            if self._is_download_completed():
+                self._open_download_folder()
+                self.close()
+            else:
+                self._open_folder_after_download = True
+                self._resume_download()
         except RuntimeError:
             return
-
-        QDesktopServices.openUrl(QUrl.fromLocalFile(directory))
 
     def _save_as(self):
         """
@@ -236,6 +235,9 @@ class DownloadToaster(QWidget):
     # ===============================
 
     def focusOutEvent(self, event):
+        if self._has_pending_open_action():
+            super().focusOutEvent(event)
+            return
         self._resume_if_pending()
         super().focusOutEvent(event)
         self.close()
@@ -250,3 +252,37 @@ class DownloadToaster(QWidget):
         if self._cancelled or self._download_started:
             return
         self._resume_download()
+
+    def _has_pending_open_action(self):
+        return self._open_file_after_download or self._open_folder_after_download
+
+    def _handle_download_state_changed(self, state):
+        if state != QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
+            return
+        if self._open_file_after_download:
+            self._open_file_after_download = False
+            self._open_downloaded_file()
+        if self._open_folder_after_download:
+            self._open_folder_after_download = False
+            self._open_download_folder()
+        if not self._open_file_after_download and not self._open_folder_after_download:
+            self.close()
+
+    def _is_download_completed(self):
+        return (
+            self.download.state()
+            == QWebEngineDownloadRequest.DownloadState.DownloadCompleted
+        )
+
+    def _open_downloaded_file(self):
+        path = os.path.join(
+            self.download.downloadDirectory(),
+            self.download.downloadFileName()
+        )
+        if os.path.exists(path):
+            QDesktopServices.openUrl(QUrl.fromLocalFile(path))
+
+    def _open_download_folder(self):
+        directory = self.download.downloadDirectory()
+        if os.path.isdir(directory):
+            QDesktopServices.openUrl(QUrl.fromLocalFile(directory))
