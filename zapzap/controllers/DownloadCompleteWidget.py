@@ -19,7 +19,9 @@ class DownloadCompleteWidget(QWidget):
         self.file_path = file_path
         self.margin = 10
         self.setWindowFlags(
-            QtCore.Qt.WindowType.Popup | QtCore.Qt.WindowType.FramelessWindowHint
+            QtCore.Qt.WindowType.Tool |
+            QtCore.Qt.WindowType.FramelessWindowHint |
+            QtCore.Qt.WindowType.WindowStaysOnTopHint
         )
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_DeleteOnClose, True)
 
@@ -95,6 +97,8 @@ class DownloadCompleteWidget(QWidget):
     def eventFilter(self, source, event):
         if source == self.parent() and event.type() == QtCore.QEvent.Type.Resize:
             self._reposition()
+        elif source == self.parent() and event.type() == QtCore.QEvent.Type.WindowDeactivate:
+            self.close()
         return super().eventFilter(source, event)
 
     def focusOutEvent(self, event):
