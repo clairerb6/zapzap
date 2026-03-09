@@ -230,18 +230,6 @@ class DownloadToaster(QWidget):
             pass
         self.close()
 
-    # ===============================
-    # Focus behavior
-    # ===============================
-
-    def focusOutEvent(self, event):
-        if self._has_pending_open_action():
-            super().focusOutEvent(event)
-            return
-        self._resume_if_pending()
-        super().focusOutEvent(event)
-        self.close()
-
     def closeEvent(self, event: QCloseEvent):
         if self.parent():
             self.parent().removeEventFilter(self)
