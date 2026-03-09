@@ -36,10 +36,9 @@ class DownloadCompleteWidget(QWidget):
 
         if self.parent():
             self.parent().installEventFilter(self)
+        QtWidgets.QApplication.instance().installEventFilter(self)
 
-        self.raise_()
         self.adjustSize()
-        self._reposition()
 
     def _build_ui(self):
         container = QFrame(self)
@@ -97,16 +96,28 @@ class DownloadCompleteWidget(QWidget):
     def eventFilter(self, source, event):
         if source == self.parent() and event.type() == QtCore.QEvent.Type.Resize:
             self._reposition()
+        elif (
+            source == QtWidgets.QApplication.instance()
+            and event.type() == QtCore.QEvent.Type.MouseButtonPress
+        ):
+            global_pos = event.globalPosition().toPoint()
+            if self.isVisible() and not self.frameGeometry().contains(global_pos):
+                self.close()
         return super().eventFilter(source, event)
-
-    def focusOutEvent(self, event):
-        self.close()
-        super().focusOutEvent(event)
 
     def closeEvent(self, event):
         if self.parent():
             self.parent().removeEventFilter(self)
+        app = QtWidgets.QApplication.instance()
+        if app:
+            app.removeEventFilter(self)
         super().closeEvent(event)
+
+    def showEvent(self, event):
+        super().showEvent(event)
+        self._reposition()
+        self.raise_()
+        self.activateWindow()
 
     def _open_file(self):
         if os.path.exists(self.file_path):
@@ -120,6 +131,6 @@ class DownloadCompleteWidget(QWidget):
         self.close()
 
     def _open_local_path(self, path: str):
-        if QDesktopServices.openUrl(QUrl.fromLocalFile(path)):
+        if QProcess.startDetached("xdg-open", [path]):
             return
-        QProcess.startDetached("xdg-open", [path])
+        QDesktopServices.openUrl(QUrl.fromLocalFile(path))

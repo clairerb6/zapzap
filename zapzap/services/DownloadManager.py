@@ -54,6 +54,7 @@ class DownloadManager:
             if state in cancelled:
                 return
             if state == QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
+                DownloadManager._dismiss_web_download_toast(download, parent)
                 DownloadManager._show_download_complete_widget(download, parent)
 
         download.stateChanged.connect(on_state_changed)
@@ -140,3 +141,30 @@ class DownloadManager:
             widget.activateWindow()
 
         QTimer.singleShot(0, show_widget)
+
+    @staticmethod
+    def _dismiss_web_download_toast(download, parent):
+        if not parent or not hasattr(parent, "page") or not parent.page():
+            return
+
+        file_name = download.downloadFileName().replace("\\", "\\\\").replace("'", "\\'")
+        script = f"""
+        (function() {{
+            const fileName = '{file_name}';
+            const candidates = Array.from(document.querySelectorAll('div, span'));
+            for (const node of candidates) {{
+                const text = (node.innerText || node.textContent || '').trim();
+                if (!text) continue;
+                const style = window.getComputedStyle(node);
+                const looksLikeToast = style.position === 'fixed' || style.position === 'absolute';
+                const mentionsDownload = text.includes(fileName) || /descarg|download|baixad|scaricat|baixado/i.test(text);
+                if (looksLikeToast && mentionsDownload) {{
+                    node.remove();
+                }}
+            }}
+        }})();
+        """
+        try:
+            parent.page().runJavaScript(script)
+        except Exception:
+            pass
