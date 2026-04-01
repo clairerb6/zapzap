@@ -31,7 +31,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dbus = ["dbus-python"]
+dbus = ["dbus-python; sys_platform == 'linux'"]
 
 [project.urls]
 Homepage = "https://rtosta.com/zapzap"
@@ -40,11 +40,13 @@ Homepage = "https://rtosta.com/zapzap"
 zapzap = "zapzap.__main__:main"
 
 [tool.setuptools]
+include-package-data = false
 packages = [
   "zapzap",
   "zapzap.config",
   "zapzap.controllers",
   "zapzap.models",
+  "zapzap.platform",
   "zapzap.resources",
   "zapzap.services",
   "zapzap.views",
@@ -56,6 +58,9 @@ packages = [
 [tool.setuptools.package-data]
 zapzap = [
   "po/*/LC_MESSAGES/*.mo",
+  "resources/themes/*.css",
+  "ui/*.ui",
+  "webengine/*.js",
   "js/*",
   "extensions/*"
 ]

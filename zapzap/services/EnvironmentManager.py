@@ -9,6 +9,7 @@ class Packaging(Enum):
     RPM = "RPM"
     DEB = "DEB"
     UNOFFICIAL = "Unofficial"
+    WINDOWS = "Windows"
 
 
 class EnvironmentManager:
@@ -61,6 +62,9 @@ class EnvironmentManager:
     @staticmethod
     def identify_packaging():
         """Identifies the packaging type of the application and returns an Enum."""
+
+        if sys.platform == "win32":
+            return Packaging.WINDOWS
 
         if "APPIMAGE" in os.environ:
             return Packaging.APPIMAGE
