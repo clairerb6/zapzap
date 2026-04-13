@@ -40,6 +40,15 @@ class PageController(QWebEnginePage):
         new_page.urlChanged.connect(self.open_in_browser)
         return new_page
 
+    def _dispose_external_page(self, page):
+        if not isinstance(page, QWebEnginePage):
+            return
+        try:
+            page.urlChanged.disconnect(self.open_in_browser)
+        except Exception:
+            pass
+        page.deleteLater()
+
     def open_in_browser(self, url: QUrl):
         """Abre o primeiro link externo no navegador padrão, evitando duplicações por redirecionamento."""
         page = self.sender()
@@ -52,11 +61,12 @@ class PageController(QWebEnginePage):
             page.setProperty("externalUrlOpened", True)
 
         if not url.isValid() or url.isEmpty():
+            self._dispose_external_page(page)
             return
 
         normalized_url = self.normalize_url(url.toString())
-
         QDesktopServices.openUrl(QUrl(normalized_url))
+        self._dispose_external_page(page)
 
     def normalize_url(self, url: str) -> str:
         """Normaliza a URL removendo parâmetros redundantes."""

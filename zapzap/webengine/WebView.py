@@ -43,7 +43,9 @@ class WebView(QWebEngineView):
         self.user = user
         self.page_index = page_index
         self.profile = None  # Inicializa o perfil como None
+        self.whatsapp_page = None
         self._gesture_filter_installed = False
+        self._signals_configured = False
 
         self.notifications = NotificationService()
         self._devtools_view = None
@@ -64,6 +66,7 @@ class WebView(QWebEngineView):
     def _initialize(self):
         """Configuração inicial."""
         self._configure_signals()
+        self._dispose_webengine_objects()
         self._configure_profile()
 
         self._setup_page()
@@ -78,8 +81,33 @@ class WebView(QWebEngineView):
 
     def _configure_signals(self):
         """Configura os sinais para eventos."""
+        if self._signals_configured:
+            return
         self.titleChanged.connect(self._on_title_changed)
         self.loadFinished.connect(self._on_load_finished)
+        self._signals_configured = True
+
+    def _dispose_webengine_objects(self):
+        """Libera objetos do WebEngine para evitar acúmulo entre reconfigurações."""
+        if self._devtools_view is not None:
+            self._devtools_view.close()
+            self._devtools_view.deleteLater()
+            self._devtools_view = None
+            self._devtools_page = None
+
+        if self.whatsapp_page is not None:
+            if self.page() is self.whatsapp_page:
+                self.setPage(None)
+            self.whatsapp_page.deleteLater()
+            self.whatsapp_page = None
+
+        if self.profile is not None:
+            try:
+                crash_handler.unregister_profile(self.profile)
+            except Exception:
+                pass
+            self.profile.deleteLater()
+            self.profile = None
 
     def _configure_profile(self):
         """Configura o perfil do QWebEngine."""
@@ -366,16 +394,23 @@ class WebView(QWebEngineView):
     def remove_files(self):
         """Remove os arquivos de cache e armazenamento persistente do perfil."""
         try:
-            if not self.user.enable:
-                self.profile = QWebEngineProfile(str(self.user.id), self)
+            profile = self.profile
+            temporary_profile = None
+            if profile is None:
+                temporary_profile = QWebEngineProfile(str(self.user.id), self)
+                profile = temporary_profile
 
-            cache_path = self.profile.cachePath()
-            storage_path = self.profile.persistentStoragePath()
+            cache_path = profile.cachePath()
+            storage_path = profile.persistentStoragePath()
 
             shutil.rmtree(cache_path, ignore_errors=True)
             shutil.rmtree(storage_path, ignore_errors=True)
 
+            if temporary_profile is not None:
+                temporary_profile.deleteLater()
+
             self.stop()
+            self.disable_page()
             self.close()
             return True
         except Exception as e:
@@ -392,9 +427,8 @@ class WebView(QWebEngineView):
             QApplication.instance().removeEventFilter(self)
             self._gesture_filter_installed = False
         if self.profile:
-            crash_handler.unregister_profile(self.profile)
             self.profile.clearHttpCache()
-        self.setPage(None)
+        self._dispose_webengine_objects()
         self.setVisible(False)
 
     def open_devtools(self):

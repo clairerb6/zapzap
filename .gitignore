@@ -140,3 +140,4 @@ dmypy.json
 
 security-reports/
 tb*.txt
+.codex
