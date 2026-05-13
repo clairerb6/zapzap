@@ -160,6 +160,15 @@ class WebView(QWebEngineView):
             except Exception:
                 pass
 
+        pdf_viewer_attr = getattr(
+            QWebEngineSettings.WebAttribute, "PdfViewerEnabled", None
+        )
+        if pdf_viewer_attr is not None:
+            try:
+                self.profile.settings().setAttribute(pdf_viewer_attr, True)
+            except Exception:
+                pass
+
         self.configure_spellcheck()
 
         size_cache = SettingsManager.get("performance/cache_size_max", 0)
