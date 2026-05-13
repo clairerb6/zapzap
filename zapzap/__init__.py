@@ -1,5 +1,6 @@
-from PyQt6.QtCore import QFileInfo
-__version__ = '6.4'
+from PyQt6.QtCore import QFileInfo, QUrl
+
+__version__ = '6.4.1'
 __appname__ = 'ZapZap'
 __comment__ = 'WhatsApp Messenger for linux'
 __domain__ = 'com.rtosta'
@@ -21,6 +22,12 @@ __licence__ = 'GNU General Public License v3.0'
 __donationPage__ = 'https://rtosta.com/zapzap/#donate'
 
 __whatsapp_url__ = 'https://web.whatsapp.com/'
+__allowed_hosts__ = [
+    QUrl(__whatsapp_url__).host().lower(),
+    "webtp.whatsapp.net",
+    "static.whatsapp.net"
+]
+
 # Link para pegar o userAgent: http://httpbin.org/user-agent
 import sys
 if sys.platform == "win32":
