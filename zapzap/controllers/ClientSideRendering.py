@@ -7,6 +7,7 @@ from PyQt6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QWidget, QLab
 from zapzap.resources.CSRButtonThemeProvider import CSRButtonTheme, CSRButtonThemeProvider
 from zapzap.services.ThemeManager import ThemeManager
 from zapzap.services.SettingsManager import SettingsManager
+from zapzap.utils.qt_color_scheme import QtColorScheme
 from gettext import gettext as _
 
 
@@ -335,7 +336,7 @@ class ClientSideRendering(QWidget):
         theme = ThemeManager.get_current_color_scheme()
         button_theme = CSRButtonThemeProvider.get_theme(self._button_theme)
 
-        if theme == Qt.ColorScheme.Dark:
+        if theme == QtColorScheme.Dark:
             self._colors = {
                 "frame": "#1d1f1f",
                 "container_bg": "#1d1f1f",

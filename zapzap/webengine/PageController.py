@@ -10,6 +10,7 @@ from zapzap import __allowed_hosts__
 from zapzap.services.AddonsManager import AddonsManager
 from zapzap.services.CustomizationsManager import CustomizationsManager
 from zapzap.services.ThemeManager import ThemeManager
+from zapzap.utils.qt_color_scheme import QtColorScheme
 
 import urllib.parse  # Para normalizar URLs
 
@@ -88,7 +89,7 @@ class PageController(QWebEnginePage):
     def apply_theme(
         self,
         _current_theme: ThemeManager.Type,
-        current_color_scheme: Qt.ColorScheme
+        current_color_scheme: QtColorScheme
     ) -> None:
         if self._force_dark_mode_fallback_active:
             self.fall_back_to_force_dark_mode()
@@ -151,7 +152,7 @@ class PageController(QWebEnginePage):
 
         settings.setAttribute(
             QWebEngineSettings.WebAttribute.ForceDarkMode,
-            (ThemeManager.get_current_color_scheme() == Qt.ColorScheme.Dark)
+            (ThemeManager.get_current_color_scheme() == QtColorScheme.Dark)
         )
 
         if self._force_dark_mode_fallback_active:
@@ -168,7 +169,7 @@ class PageController(QWebEnginePage):
         # only works well if WAWeb is using its own light theme.
         self.runJavaScript(
             f'''(() => {{
-                localStorage["theme"] = JSON.stringify("{Qt.ColorScheme.Light.name.lower()}");
+                localStorage["theme"] = JSON.stringify("{QtColorScheme.Light.name.lower()}");
                 localStorage["system-theme-mode"] = JSON.stringify(false);
             }})()'''
         )

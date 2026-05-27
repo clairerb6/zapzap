@@ -5,7 +5,6 @@ from typing import ClassVar
 from typing import cast
 
 from PyQt6.QtCore import QObject
-from PyQt6.QtCore import Qt
 from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtGui import QColor
 from PyQt6.QtGui import QPalette
@@ -14,6 +13,7 @@ from PyQt6.QtWidgets import QApplication
 from zapzap.resources.ThemeStylesheet import ThemeStylesheet
 from zapzap.services.SystemThemeMonitor import SystemThemeMonitor
 from zapzap.services.SettingsManager import SettingsManager
+from zapzap.utils.qt_color_scheme import QtColorScheme
 
 
 class ThemeManager(QObject):
@@ -52,7 +52,7 @@ class ThemeManager(QObject):
 
         super().__init__(parent)
 
-        self._current_color_scheme = Qt.ColorScheme.Unknown
+        self._current_color_scheme = QtColorScheme.Unknown
         self._last_emitted_theme_state = None
         self._system_theme_monitor = SystemThemeMonitor(self)
         self._system_color_scheme = self._get_effective_system_color_scheme()
@@ -93,11 +93,11 @@ class ThemeManager(QObject):
     def _get_app_instance() -> QApplication | None:
         return cast(QApplication | None, QApplication.instance())
 
-    def _get_theme_color_scheme(self, theme: Type) -> Qt.ColorScheme:
+    def _get_theme_color_scheme(self, theme: Type) -> QtColorScheme:
         if theme == type(self).Type.Auto:
             return self._system_color_scheme
 
-        return Qt.ColorScheme[theme.name]
+        return QtColorScheme[theme.name]
 
     @classmethod
     def start(cls) -> ThemeManager:
@@ -136,16 +136,16 @@ class ThemeManager(QObject):
         return cls.instance()._current_theme
 
     @classmethod
-    def get_current_color_scheme(cls) -> Qt.ColorScheme:
+    def get_current_color_scheme(cls) -> QtColorScheme:
         return cls.instance()._current_color_scheme
 
-    def _get_effective_system_color_scheme(self) -> Qt.ColorScheme:
+    def _get_effective_system_color_scheme(self) -> QtColorScheme:
         color_scheme = self._system_theme_monitor.get_current_color_scheme()
 
-        if color_scheme == Qt.ColorScheme.Dark:
-            return Qt.ColorScheme.Dark
+        if color_scheme == QtColorScheme.Dark:
+            return QtColorScheme.Dark
 
-        return Qt.ColorScheme.Light
+        return QtColorScheme.Light
 
     def _apply_color_scheme(self) -> None:
         current_color_scheme = self._get_theme_color_scheme(self._current_theme)
@@ -156,7 +156,7 @@ class ThemeManager(QObject):
     def _emit_theme_changed(
         self,
         current_theme: Type,
-        effective_color_scheme: Qt.ColorScheme
+        effective_color_scheme: QtColorScheme
     ) -> None:
         theme_state = (current_theme, effective_color_scheme)
 
@@ -169,9 +169,9 @@ class ThemeManager(QObject):
             self._current_theme == type(self).Type.Auto
         )
 
-    def _on_system_color_scheme_changed(self, new_system_color_scheme: Qt.ColorScheme) -> None:
-        if new_system_color_scheme == Qt.ColorScheme.Unknown:
-            new_system_color_scheme = Qt.ColorScheme.Light
+    def _on_system_color_scheme_changed(self, new_system_color_scheme: QtColorScheme) -> None:
+        if new_system_color_scheme == QtColorScheme.Unknown:
+            new_system_color_scheme = QtColorScheme.Light
 
         if new_system_color_scheme == self._system_color_scheme:
             return
@@ -199,14 +199,14 @@ class ThemeManager(QObject):
         return palette
 
     @classmethod
-    def _apply_palette_for_color_scheme(cls, color_scheme: Qt.ColorScheme) -> None:
+    def _apply_palette_for_color_scheme(cls, color_scheme: QtColorScheme) -> None:
         app = cls._get_app_instance()
         if app is None:
             return
 
         palette_colors = (
             cls._DARK_PALETTE_COLORS
-            if color_scheme == Qt.ColorScheme.Dark
+            if color_scheme == QtColorScheme.Dark
             else cls._LIGHT_PALETTE_COLORS
         )
 

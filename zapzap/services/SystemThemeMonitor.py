@@ -4,7 +4,6 @@ from typing import Any
 from typing import cast
 
 from PyQt6.QtCore import QObject
-from PyQt6.QtCore import Qt
 from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtCore import pyqtSlot
 from PyQt6.QtDBus import QDBusConnection
@@ -13,6 +12,8 @@ from PyQt6.QtDBus import QDBusMessage
 from PyQt6.QtDBus import QDBusVariant
 from PyQt6.QtGui import QStyleHints
 from PyQt6.QtWidgets import QApplication
+
+from zapzap.utils.qt_color_scheme import QtColorScheme
 
 
 class SystemThemeMonitor(QObject):
@@ -27,7 +28,7 @@ class SystemThemeMonitor(QObject):
     NAMESPACE = "org.freedesktop.appearance"
     KEY = "color-scheme"
 
-    color_scheme_changed = pyqtSignal(Qt.ColorScheme)
+    color_scheme_changed = pyqtSignal(object)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -57,7 +58,7 @@ class SystemThemeMonitor(QObject):
         self._enabled = enabled
 
     # === Public methods === #
-    def get_current_color_scheme(self) -> Qt.ColorScheme:
+    def get_current_color_scheme(self) -> QtColorScheme:
         return self._current_color_scheme
 
     # === Common private methods === #
@@ -71,7 +72,7 @@ class SystemThemeMonitor(QObject):
         self._portal_stop_monitor()
         self._qt_style_hints_stop_monitor()
 
-    def _report_color_scheme_changed(self, color_scheme: Qt.ColorScheme) -> None:
+    def _report_color_scheme_changed(self, color_scheme: QtColorScheme) -> None:
         if color_scheme == self._current_color_scheme:
             return
 
@@ -79,10 +80,10 @@ class SystemThemeMonitor(QObject):
         self.color_scheme_changed.emit(color_scheme)
 
     @classmethod
-    def _get_current_color_scheme(cls) -> Qt.ColorScheme:
+    def _get_current_color_scheme(cls) -> QtColorScheme:
         color_scheme = cls._portal_get_current_color_scheme()
 
-        if color_scheme in (Qt.ColorScheme.Dark, Qt.ColorScheme.Light):
+        if color_scheme in (QtColorScheme.Dark, QtColorScheme.Light):
             return color_scheme
 
         return cls._qt_style_hints_get_current_color_scheme()
@@ -123,7 +124,7 @@ class SystemThemeMonitor(QObject):
             self._portal_monitoring = False
 
     @classmethod
-    def _portal_get_current_color_scheme(cls) -> Qt.ColorScheme:
+    def _portal_get_current_color_scheme(cls) -> QtColorScheme:
         iface = QDBusInterface(
             cls.SERVICE,
             cls.PATH,
@@ -134,11 +135,11 @@ class SystemThemeMonitor(QObject):
         reply = iface.call("Read", cls.NAMESPACE, cls.KEY)
 
         if reply.type() == QDBusMessage.MessageType.ErrorMessage:
-            return Qt.ColorScheme.Unknown
+            return QtColorScheme.Unknown
 
         args = reply.arguments()
         if not args:
-            return Qt.ColorScheme.Unknown
+            return QtColorScheme.Unknown
 
         return cls._portal_get_color_scheme_from_value(args[0])
 
@@ -156,13 +157,13 @@ class SystemThemeMonitor(QObject):
             return
 
         color_scheme = type(self)._portal_get_color_scheme_from_value(value)
-        if color_scheme == Qt.ColorScheme.Unknown:
+        if color_scheme == QtColorScheme.Unknown:
             color_scheme = type(self)._portal_get_current_color_scheme()
 
         self._report_color_scheme_changed(color_scheme)
 
     @classmethod
-    def _portal_get_color_scheme_from_value(cls, value: Any) -> Qt.ColorScheme:
+    def _portal_get_color_scheme_from_value(cls, value: Any) -> QtColorScheme:
         while isinstance(value, QDBusVariant):
             value = value.variant()
 
@@ -172,10 +173,10 @@ class SystemThemeMonitor(QObject):
             value = 0
 
         return {
-            0: Qt.ColorScheme.Unknown,
-            1: Qt.ColorScheme.Dark,
-            2: Qt.ColorScheme.Light,
-        }.get(value, Qt.ColorScheme.Unknown)
+            0: QtColorScheme.Unknown,
+            1: QtColorScheme.Dark,
+            2: QtColorScheme.Light,
+        }.get(value, QtColorScheme.Unknown)
 
     # === Qt style hints private methods === #
     @classmethod
@@ -189,6 +190,9 @@ class SystemThemeMonitor(QObject):
 
         style_hints = type(self)._qt_style_hints_get_style_hints()
         if style_hints is None:
+            return False
+
+        if not hasattr(style_hints, "colorSchemeChanged"):
             return False
 
         style_hints.colorSchemeChanged.connect(
@@ -206,6 +210,10 @@ class SystemThemeMonitor(QObject):
         if style_hints is None:
             return
 
+        if not hasattr(style_hints, "colorSchemeChanged"):
+            self._qt_style_hints_monitoring = False
+            return
+
         try:
             style_hints.colorSchemeChanged.disconnect(
                 self._qt_style_hints_color_scheme_changed
@@ -216,16 +224,19 @@ class SystemThemeMonitor(QObject):
         self._qt_style_hints_monitoring = False
 
     @classmethod
-    def _qt_style_hints_get_current_color_scheme(cls) -> Qt.ColorScheme:
+    def _qt_style_hints_get_current_color_scheme(cls) -> QtColorScheme:
         style_hints = cls._qt_style_hints_get_style_hints()
         if not style_hints:
-            return Qt.ColorScheme.Unknown
+            return QtColorScheme.Unknown
+
+        if not hasattr(style_hints, "colorScheme"):
+            return QtColorScheme.Unknown
 
         color_scheme = style_hints.colorScheme()
-        if color_scheme not in (Qt.ColorScheme.Light, Qt.ColorScheme.Dark):
-            return Qt.ColorScheme.Unknown
+        if color_scheme not in (QtColorScheme.Light, QtColorScheme.Dark):
+            return QtColorScheme.Unknown
 
         return color_scheme
 
-    def _qt_style_hints_color_scheme_changed(self, new_system_color_scheme: Qt.ColorScheme) -> None:
+    def _qt_style_hints_color_scheme_changed(self, new_system_color_scheme: QtColorScheme) -> None:
         self._report_color_scheme_changed(new_system_color_scheme)
