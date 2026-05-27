@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>693</width>
-    <height>620</height>
+    <height>857</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -66,16 +66,6 @@
            <string>Style</string>
           </property>
           <layout class="QGridLayout" name="gridLayout">
-           <item row="0" column="0">
-            <widget class="QRadioButton" name="theme_auto_radioButton">
-             <property name="text">
-              <string>Adaptive</string>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="2">
             <widget class="QRadioButton" name="theme_dark_radioButton">
              <property name="text">
@@ -88,6 +78,85 @@
              <property name="text">
               <string>Light</string>
              </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="theme_auto_radioButton">
+             <property name="text">
+              <string>Adaptive</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="csr_groupBox">
+          <property name="title">
+           <string>Custom title bar</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="4" column="0" colspan="2">
+            <widget class="QCheckBox" name="csr_show_maximize_checkBox">
+             <property name="text">
+              <string>Show maximize button</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="2">
+            <widget class="QCheckBox" name="csr_show_minimize_checkBox">
+             <property name="text">
+              <string>Show minimize button</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0" colspan="2">
+            <widget class="QLabel" name="csr_restart_label">
+             <property name="font">
+              <font>
+               <italic>true</italic>
+              </font>
+             </property>
+             <property name="text">
+              <string>Note:Requires restart.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="csr_theme_label">
+             <property name="text">
+              <string>Buttons theme</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="csr_theme_comboBox"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="csr_direction_label">
+             <property name="text">
+              <string>Buttons direction</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="csr_direction_comboBox">
+             <item>
+              <property name="text">
+               <string>Right</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Left</string>
+              </property>
+             </item>
             </widget>
            </item>
           </layout>
@@ -106,6 +175,13 @@
             <widget class="QCheckBox" name="notificationCounter">
              <property name="text">
               <string>Remove notification indicator</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="3">
+            <widget class="Line" name="line">
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
              </property>
             </widget>
            </item>
@@ -130,13 +206,6 @@
             <widget class="QRadioButton" name="tray_slight_radioButton">
              <property name="text">
               <string>Symbolic light</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="3">
-            <widget class="Line" name="line">
-             <property name="orientation">
-              <enum>Qt::Orientation::Horizontal</enum>
              </property>
             </widget>
            </item>

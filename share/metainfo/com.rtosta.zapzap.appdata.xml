@@ -55,6 +55,16 @@
   </screenshots>
 
   <releases>
+      <release date="2026-05-15" version="6.5">
+          <description>
+              <ul>
+                  <li>New: Custom title bar</li>
+                  <li>New: Refactor DownloadDialog UI</li>
+                  <li>Fix: WhatsApp Web theme sync</li>
+                  <li>Fix: grouped notifications</li>
+              </ul>
+          </description>
+      </release>
       <release date="2026-05-15" version="6.4.2">
           <description>
               <ul>
