@@ -62,7 +62,8 @@ zapzap = [
   "ui/*.ui",
   "webengine/*.js",
   "js/*",
-  "extensions/*"
+  "extensions/*",
+  "webengine/*.js"
 ]
 
 [tool.setuptools.data-files]

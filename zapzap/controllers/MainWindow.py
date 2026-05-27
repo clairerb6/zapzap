@@ -30,8 +30,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.theme_action_group = None
         self._setup_ui()
 
-        if not SettingsManager.get("notification/donation_message", True):
-            QtoasterDonation.showMessage(parent=self)
+        #if not SettingsManager.get("notification/donation_message", True):
+        #    QtoasterDonation.showMessage(parent=self)
 
     def changeEvent(self, event):
         super().changeEvent(event)
@@ -81,6 +81,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             animated=False,
             persist=False,
         )
+        ThemeManager.instance().theme_changed.connect(self.refresh_theme_menu)
 
     def load_settings(self):
         """Restaura as configurações salvas da janela e do sistema."""
@@ -89,9 +90,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.restoreState(SettingsManager.get(
             "main/windowState", QByteArray()))
 
-        # Exibe o SysTray e inicia o ThemeManager
+        # Exibe o SysTray
         SysTrayManager.start()
-        ThemeManager.start()
 
     def _setup_toolbar(self):
         """Ativa o toolBar com o menu de usuários (personalização futura)"""
@@ -151,7 +151,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def set_theme_mode(self, theme: ThemeManager.Type):
         """Aplica o tema selecionado pelo menu."""
         ThemeManager.set_theme(theme)
-        self.refresh_theme_menu()
 
     def refresh_theme_menu(self):
         """Sincroniza o estado do menu com a preferência de tema salva."""
@@ -285,6 +284,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     # === Controle de Visibilidade da Janela ===
     def show_window(self):
+        if self.parentWidget() is not None and hasattr(self.window(), "is_csr_wrapper"):
+            self.window().show_window()
+            return
         """Alterna a visibilidade da janela principal."""
         if self.isHidden():
             if self.is_fullscreen:
