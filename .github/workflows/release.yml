@@ -1,6 +1,8 @@
-name: Build and Release Zapzap
+name: Build RPM package
 
 on:
+  workflow_dispatch:
+
   release:
     types: [created]
 
@@ -11,154 +13,38 @@ on:
 permissions:
   contents: write
 
-env:
-  PYTHON_VERSION: "3.13"
-
-# ==========================================================
-# PYTHON PACKAGE
-# ==========================================================
-
 jobs:
-  build-python:
+  build-rpm:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          python-version: "3.13"
 
-      - name: Install build dependencies
+      - name: Install COPR client
         run: |
           python -m pip install --upgrade pip
-          pip install build wheel setuptools
+          pip install copr
 
-      - name: Build wheel
+      - name: Configure COPR
         run: |
-          python -m build --wheel --outdir dist
-
-      - name: List generated files
-        run: |
-          ls -lah dist/
-
-      - name: Upload Python artifacts
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            dist/*.whl
+          mkdir -p ~/.config
+          echo "$COPR_CONFIG" > ~/.config/copr
+          chmod 600 ~/.config/copr
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COPR_CONFIG: ${{ secrets.COPR_CONFIG }}
 
-# ==========================================================
-# WINDOWS
-# ==========================================================
-
-  build-windows:
-    runs-on: windows-latest
-
-    env:
-      PYTHONUTF8: 1
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pyinstaller
-          pip install -r requirements.txt
-
-      - name: Build Windows executable
-        run: |
-          python -m builders.windows_builder
-
-      - name: List generated files
-        run: |
-          dir dist
-
-      - name: Upload Windows artifacts
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            dist/ZapZap-Windows.zip
+      - name: Submit RPM build to COPR
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-# ==========================================================
-# APPIMAGE
-# ==========================================================
-
-  build-appimage:
-    runs-on: ubuntu-22.04
-
-    env:
-      PYTHONUTF8: 1
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-
-      - name: Install system dependencies
+          VERSION: ${{ github.ref_name }}
+          COPR_USERNAME: ${{ vars.COPR_USERNAME || github.repository_owner }}
+          COPR_PROJECT: ${{ vars.COPR_PROJECT || 'zapzap' }}
+          REPO_URL: https://github.com/${{ github.repository }}.git
+          CREATE_RELEASE: "false"
         run: |
-          sudo apt update
-
-          sudo apt install -y \
-            build-essential \
-            python3-dev \
-            pkg-config \
-            patchelf \
-            desktop-file-utils \
-            fuse \
-            wget \
-            unzip \
-            curl \
-            libdbus-1-dev \
-            libdbus-glib-1-dev \
-            libglib2.0-dev \
-            libegl1 \
-            libopengl0 \
-            libxkbcommon-x11-0 \
-            libnss3 \
-            libxss1 \
-            libasound2
-
-      - name: Install Python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pyinstaller
-          pip install -r requirements.txt
-
-      - name: Get version from tag
-        shell: bash
-        run: |
-          echo "VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
-
-      - name: Build AppImage
-        run: |
-          python -m builders.appimage_builder ${{ env.VERSION }}
-
-      - name: List generated files
-        run: |
-          ls -lah dist/
-
-      - name: Upload AppImage artifacts
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            dist/*.AppImage
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          python builders/copr_builder.py

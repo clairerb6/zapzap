@@ -2,12 +2,12 @@ from PyQt6.QtWebEngineCore import QWebEngineDownloadRequest
 from PyQt6.QtCore import QStandardPaths
 from gettext import gettext as _
 from zapzap.services.SettingsManager import SettingsManager
+from zapzap.services.DownloadNamingService import DownloadNamingService
 from PyQt6.QtCore import QTimer
 from PyQt6.QtWidgets import QFileDialog
 from zapzap.controllers.DownloadCompleteWidget import DownloadCompleteWidget
 from zapzap.controllers.DownloadDialog import DownloadDialog
 import os
-import shutil
 
 
 class DownloadManager:
@@ -15,6 +15,7 @@ class DownloadManager:
         QStandardPaths.StandardLocation.DownloadLocation
     )
     _completion_widgets = []
+    _download_dialogs = []
 
     @staticmethod
     def set_path(new_path):
@@ -60,47 +61,26 @@ class DownloadManager:
 
         download.stateChanged.connect(on_state_changed)
 
-        dialog = DownloadDialog(
-            download.downloadFileName(),
-            download.downloadDirectory(),
-            parent
+        DownloadManager._normalize_download_file_name(download)
+
+        dialog = DownloadDialog(download, parent)
+        DownloadManager._download_dialogs.append(dialog)
+        dialog.destroyed.connect(
+            lambda *_: DownloadManager._download_dialogs.remove(dialog)
+            if dialog in DownloadManager._download_dialogs else None
         )
-        result = dialog.exec()
+        dialog.show()
 
-        if result != dialog.DialogCode.Accepted:
-            DownloadManager._set_web_toast_hidden(parent, False)
-            download.cancel()
-            return
+    @staticmethod
+    def _normalize_download_file_name(download: QWebEngineDownloadRequest):
+        file_name = DownloadNamingService.normalized_file_name(
+            download.downloadFileName() or download.suggestedFileName(),
+            download.mimeType(),
+            download.url().toString()
+        )
 
-        action = dialog.selected_action
-        if action == DownloadDialog.ACTION_CANCEL:
-            DownloadManager._set_web_toast_hidden(parent, False)
-            download.cancel()
-            return
-
-        if action == DownloadDialog.ACTION_SAVE_AS and dialog.selected_path:
-            requested_dir = os.path.dirname(dialog.selected_path)
-            requested_name = os.path.basename(dialog.selected_path)
-            download.setDownloadDirectory(requested_dir)
-            download.setDownloadFileName(requested_name)
-
-            current_dir = download.downloadDirectory()
-            current_name = download.downloadFileName()
-            if current_dir != requested_dir or current_name != requested_name:
-                def move_when_done(state):
-                    if state != QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
-                        return
-                    try:
-                        source = os.path.join(current_dir, current_name)
-                        if os.path.exists(source):
-                            os.makedirs(requested_dir, exist_ok=True)
-                            shutil.move(source, dialog.selected_path)
-                    except Exception:
-                        pass
-
-                download.stateChanged.connect(move_when_done)
-
-        download.accept()
+        if file_name != download.downloadFileName():
+            download.setDownloadFileName(file_name)
 
     @staticmethod
     def open_folder_dialog(parent):

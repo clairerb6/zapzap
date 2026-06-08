@@ -38,8 +38,16 @@ Maintainer: Katherine Flores <me@katherineflores.me>
 Description: ZapZap - Cliente no oficial de WhatsApp Web para Linux.
 EOF
 
-rsync -av --exclude='deb_build' --exclude='*.deb' --exclude='.git' --exclude='.github' --exclude='_scripts' --exclude='share' ./ deb_build/usr/share/zapzap/
+rsync -a \
+  --exclude='__pycache__' \
+  --exclude='*.pyc' \
+  zapzap \
+  LICENSE \
+  README.md \
+  requirements.txt \
+  pyproject.toml \
+  deb_build/usr/share/zapzap/
 
-dpkg-deb --build deb_build
+dpkg-deb --root-owner-group --build deb_build
 
 mv deb_build.deb zapzap_${VERSION}_amd64.deb
