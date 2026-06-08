@@ -49,6 +49,7 @@ packages = [
   "zapzap.platform",
   "zapzap.resources",
   "zapzap.services",
+  "zapzap.utils",
   "zapzap.views",
   "zapzap.debug",
   "zapzap.notifications",
