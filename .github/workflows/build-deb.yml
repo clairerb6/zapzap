@@ -22,9 +22,12 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y \
+            software-properties-common \
             dpkg-dev \
             rsync \
             python3
+          sudo add-apt-repository -y universe
+          sudo apt update
 
       - name: Build .deb package
         run: ./_scripts/build-deb.sh
@@ -43,7 +46,9 @@ jobs:
             | while read -r dep; do
                 [ -n "${dep}" ] || continue
                 echo "Validating ${dep}"
-                apt-cache show "${dep}" >/dev/null
+                apt-cache policy "${dep}"
+                apt-cache show "${dep}" >/dev/null 2>&1 \
+                  || apt-cache pkgnames | grep -Fx "${dep}" >/dev/null
               done
 
       # 🧪 Siempre subimos artifact (PRs, pushes, tags)
