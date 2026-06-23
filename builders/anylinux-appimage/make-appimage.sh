@@ -74,12 +74,6 @@ quick-sharun \
     "${ZAPZAP_BIN}" \
     /usr/lib/libQt6Network.so*
 
-echo "==== Qt Widgets ===="
-find AppDir -name "libQt6Widgets*" -o -name "libQt6PrintSupport*"
-
-echo "==== PyQt Widgets ===="
-find AppDir -name "QtWidgets.abi3.so"
-
 APPDIR="./AppDir"
 
 if [ ! -d "${APPDIR}" ]; then
@@ -103,17 +97,6 @@ cp -av \
 echo
 echo "Dicionários no AppDir:"
 find "${APPDIR}" -name "*.bdic" | sort
-
-
-echo
-echo "==============================================================="
-echo "Copiando libQt6Widgets*"
-echo "==============================================================="
-
-
-cp -av /usr/lib/libQt6Widgets.so* AppDir/lib/
-cp -av /usr/lib/libQt6PrintSupport.so* AppDir/lib/
-
 
 echo
 echo "==============================================================="
