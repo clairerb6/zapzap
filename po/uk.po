@@ -10,9 +10,9 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-14 10:17-0300\n"
 "PO-Revision-Date: 2025-02-28 12:43+0500\n"
-"Last-Translator: Dmitriy Q  <krotesk at mail dot ru>\n"
+"Last-Translator: Igor Semen  <semenigor at gmail dot com>\n"
 "Language-Team: TranslAster\n"
-"Language: ru_RU\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,53 +22,53 @@ msgstr ""
 #: zapzap/views/ui_browser.py:84 zapzap/views/ui_page_account.py:80
 #: zapzap/controllers/Browser.py:226 zapzap/controllers/ShortcutsDialog.py:61
 msgid "New account"
-msgstr "Новый аккаунт"
+msgstr "Новий акаунт"
 
 #: zapzap/views/ui_browser.py:85
 msgid "New conversation by the phone number"
-msgstr "Новый разговор по номеру телефона"
+msgstr "Нова розмова за номером телефону"
 
 #: zapzap/views/ui_browser.py:86 zapzap/controllers/ShortcutsDialog.py:10
 msgid "New conversation"
-msgstr "Новый разговор"
+msgstr "Нова розмова"
 
 #: zapzap/views/ui_browser.py:87
 msgid "ZapZap Settings"
-msgstr "Настройки ZapZap"
+msgstr "Налаштування ZapZap"
 
 #: zapzap/views/ui_card_user.py:77
 msgid "Click to generate new colors for the icon"
-msgstr "Нажмите, чтобы создать новые цвета для иконки"
+msgstr "Натисніть, щоб створити нові кольори для іконки"
 
 #: zapzap/views/ui_card_user.py:78
 msgid "Temporarily disable"
-msgstr "Временно отключить"
+msgstr "Тимчасово відключити"
 
 #: zapzap/views/ui_card_user.py:79 zapzap/controllers/CardUser.py:198
 msgid "Disable"
-msgstr "Отключить"
+msgstr "Відключити"
 
 #: zapzap/views/ui_card_user.py:80
 msgid "Silences the notifications"
-msgstr "Отключить уведомления"
+msgstr "Відключити сповіщення"
 
 #: zapzap/views/ui_card_user.py:81 zapzap/controllers/CardUser.py:189
 msgid "Do not disturb"
-msgstr "Не беспокоить"
+msgstr "Не турбувати"
 
 #: zapzap/views/ui_card_user.py:82
 msgid "Delete permanently"
-msgstr "Удалить окончательно"
+msgstr "Видалити остаточно"
 
 #: zapzap/views/ui_card_user.py:83 zapzap/views/ui_page_customizations.py:249
 #: zapzap/views/ui_page_customizations.py:263
 #: zapzap/controllers/CardUser.py:228
 msgid "Delete"
-msgstr "Удалить"
+msgstr "Видалити"
 
 #: zapzap/views/ui_card_user.py:84
 msgid "Enter the user name"
-msgstr "Введите имя пользователя"
+msgstr "Введіть ім'я користувача'"
 
 #: zapzap/views/ui_mainwindow.py:109 zapzap/views/ui_qtoaster_donation.py:165
 #: zapzap/views/ui_shortcuts_dialog.py:58
@@ -81,7 +81,7 @@ msgstr "Файл"
 
 #: zapzap/views/ui_mainwindow.py:111
 msgid "View"
-msgstr "Обзор"
+msgstr "Перегляд"
 
 #: zapzap/views/ui_mainwindow.py:112
 msgid "Chat"
@@ -89,16 +89,16 @@ msgstr "Чат"
 
 #: zapzap/views/ui_mainwindow.py:113
 msgid "Users"
-msgstr "Пользователи"
+msgstr "Користувачі"
 
 #: zapzap/views/ui_mainwindow.py:114
 msgid "Help"
-msgstr "Справка"
+msgstr "Довідка"
 
 #: zapzap/views/ui_mainwindow.py:115 zapzap/views/ui_settings.py:165
 #: zapzap/services/SysTrayManager.py:57
 msgid "Quit"
-msgstr "Выйти"
+msgstr "Вийти"
 
 #: zapzap/views/ui_mainwindow.py:116
 msgid "Ctrl+Q"
@@ -106,7 +106,7 @@ msgstr "Ctrl+Q"
 
 #: zapzap/views/ui_mainwindow.py:117 zapzap/controllers/ShortcutsDialog.py:44
 msgid "Hide"
-msgstr "Скрыть"
+msgstr "Приховати"
 
 #: zapzap/views/ui_mainwindow.py:118
 msgid "Ctrl+W"
@@ -116,7 +116,7 @@ msgstr "Ctrl+W"
 #: zapzap/controllers/ShortcutsDialog.py:43
 #: zapzap/services/SysTrayManager.py:55
 msgid "Settings"
-msgstr "Настройки"
+msgstr "Налаштування"
 
 #: zapzap/views/ui_mainwindow.py:120
 msgid "Ctrl+P"
@@ -124,7 +124,7 @@ msgstr "Ctrl+P"
 
 #: zapzap/views/ui_mainwindow.py:121 zapzap/controllers/ShortcutsDialog.py:52
 msgid "Reset zoom"
-msgstr "Сброс масштабирования"
+msgstr "Скинути масштабування"
 
 #: zapzap/views/ui_mainwindow.py:122
 msgid "Ctrl+0"
@@ -132,7 +132,7 @@ msgstr "Ctrl+0"
 
 #: zapzap/views/ui_mainwindow.py:123 zapzap/controllers/ShortcutsDialog.py:53
 msgid "Zoom in"
-msgstr "Увеличить"
+msgstr "Збільшити"
 
 #: zapzap/views/ui_mainwindow.py:124
 msgid "Ctrl++"
@@ -140,7 +140,7 @@ msgstr "Ctrl++"
 
 #: zapzap/views/ui_mainwindow.py:125 zapzap/controllers/ShortcutsDialog.py:54
 msgid "Zoom out"
-msgstr "Уменьшить"
+msgstr "Зменшити"
 
 #: zapzap/views/ui_mainwindow.py:126
 msgid "Ctrl+-"
@@ -148,7 +148,7 @@ msgstr "Ctrl+-"
 
 #: zapzap/views/ui_mainwindow.py:127
 msgid "Toggle full screen"
-msgstr "Переключить полноэкранный режим"
+msgstr "Перемкнути повноекранний режимм"
 
 #: zapzap/views/ui_mainwindow.py:128
 msgid "F11"
@@ -166,7 +166,7 @@ msgstr "Ctrl++"
 #: zapzap/views/ui_mainwindow.py:131
 #, fuzzy
 msgid "Grid View"
-msgstr "Обзор"
+msgstr "Перегляд"
 
 #: zapzap/views/ui_mainwindow.py:132
 #, fuzzy
@@ -175,7 +175,7 @@ msgstr "Ctrl+Q"
 
 #: zapzap/views/ui_mainwindow.py:133 zapzap/views/ui_page_appearance.py:161
 msgid "Show sidebar"
-msgstr "Показать боковую панель"
+msgstr "Показати бічну панель"
 
 #: zapzap/views/ui_mainwindow.py:134 zapzap/controllers/ShortcutsDialog.py:49
 msgid "Automatic theme"
@@ -189,7 +189,7 @@ msgstr "Ctrl++"
 #: zapzap/views/ui_mainwindow.py:136 zapzap/controllers/ShortcutsDialog.py:50
 #, fuzzy
 msgid "Light theme"
-msgstr "Светлый"
+msgstr "Світлий"
 
 #: zapzap/views/ui_mainwindow.py:137
 #, fuzzy
@@ -207,7 +207,7 @@ msgstr "Ctrl++"
 
 #: zapzap/views/ui_mainwindow.py:140 zapzap/views/ui_page_customizations.py:268
 msgid "Reload"
-msgstr "Перезагрузить"
+msgstr "Перезавантажити"
 
 #: zapzap/views/ui_mainwindow.py:141
 msgid "F5"
@@ -215,7 +215,7 @@ msgstr "F5"
 
 #: zapzap/views/ui_mainwindow.py:142
 msgid "New chat"
-msgstr "Новый чат"
+msgstr "Новий чат"
 
 #: zapzap/views/ui_mainwindow.py:143
 msgid "Ctrl+N"
@@ -223,7 +223,7 @@ msgstr "Ctrl+N"
 
 #: zapzap/views/ui_mainwindow.py:144
 msgid "By number phone"
-msgstr "По номеру телефона"
+msgstr "За номером телефону"
 
 #: zapzap/views/ui_mainwindow.py:145
 msgid "Ctrl+M"
@@ -231,7 +231,7 @@ msgstr "Ctrl+M"
 
 #: zapzap/views/ui_mainwindow.py:146 zapzap/views/ui_shortcuts_dialog.py:56
 msgid "Keyboard shortcuts"
-msgstr "Клавиатурные сокращения"
+msgstr "Клавіатурні скорочення"
 
 #: zapzap/views/ui_mainwindow.py:147
 #, fuzzy
@@ -241,15 +241,15 @@ msgstr "Ctrl++"
 #: zapzap/views/ui_mainwindow.py:148 zapzap/views/ui_settings.py:163
 #: zapzap/views/ui_page_about.py:115
 msgid "About"
-msgstr "О программе"
+msgstr "Про програму"
 
 #: zapzap/views/ui_page_account.py:79
 msgid "My accounts"
-msgstr "Мой аккаунт"
+msgstr "Мій аккаунт"
 
 #: zapzap/views/ui_page_appearance.py:143 zapzap/views/ui_settings.py:156
 msgid "Appearance"
-msgstr "Внешний вид"
+msgstr "Зовнішній вигляд"
 
 #: zapzap/views/ui_page_appearance.py:144
 msgid "Style"
@@ -257,15 +257,15 @@ msgstr "Стиль"
 
 #: zapzap/views/ui_page_appearance.py:145
 msgid "Dark"
-msgstr "Темный"
+msgstr "Темний"
 
 #: zapzap/views/ui_page_appearance.py:146
 msgid "Light"
-msgstr "Светлый"
+msgstr "Світлий"
 
 #: zapzap/views/ui_page_appearance.py:147
 msgid "Adaptive"
-msgstr "Адаптивный"
+msgstr "Адаптивний"
 
 #: zapzap/views/ui_page_appearance.py:148
 msgid "Custom title bar"
@@ -282,7 +282,7 @@ msgstr ""
 #: zapzap/views/ui_page_appearance.py:151
 #, fuzzy
 msgid "Note:Requires restart."
-msgstr "Примечание: Требуется перезапуск."
+msgstr "Примітка: Необхідне перезавантаження"
 
 #: zapzap/views/ui_page_appearance.py:152
 msgid "Buttons theme"
@@ -295,7 +295,7 @@ msgstr ""
 #: zapzap/views/ui_page_appearance.py:154
 #, fuzzy
 msgid "Right"
-msgstr "Светлый"
+msgstr "Світлий"
 
 #: zapzap/views/ui_page_appearance.py:155
 msgid "Left"
@@ -303,7 +303,7 @@ msgstr ""
 
 #: zapzap/views/ui_page_appearance.py:156
 msgid "Tray icon"
-msgstr "Значок в трее"
+msgstr "Значок в треї"
 
 #: zapzap/views/ui_page_appearance.py:157
 msgid "Remove notification indicator"
@@ -311,7 +311,7 @@ msgstr ""
 
 #: zapzap/views/ui_page_appearance.py:158
 msgid "Default"
-msgstr "По-умолчанию"
+msgstr "По-замовчуванню"
 
 #: zapzap/views/ui_page_appearance.py:159
 msgid "Symbolic dark"
@@ -323,7 +323,7 @@ msgstr "Symbolic light"
 
 #: zapzap/views/ui_page_appearance.py:162
 msgid "Show menu bar"
-msgstr "Показать панель меню"
+msgstr "Показати панель меню"
 
 #: zapzap/views/ui_page_appearance.py:163
 msgid "Scale"
@@ -351,8 +351,7 @@ msgstr "200 %"
 
 #: zapzap/views/ui_page_appearance.py:169
 msgid "Note: The change of scale will only have effect until restarting."
-msgstr ""
-"Примечание: Изменение масштаба будет действовать только до перезапуска."
+msgstr "Примітка: Зміна масштабу буде діяти лише до перезапуску."
 
 #: zapzap/views/ui_page_customizations.py:232 zapzap/views/ui_settings.py:157
 msgid "Customizations"
@@ -361,7 +360,7 @@ msgstr ""
 #: zapzap/views/ui_page_customizations.py:233 zapzap/webengine/WebView.py:534
 #, fuzzy
 msgid "Account"
-msgstr "Аккаунт"
+msgstr "Акаунт"
 
 #: zapzap/views/ui_page_customizations.py:234
 msgid "Inherit global settings"
@@ -399,7 +398,7 @@ msgstr ""
 #: zapzap/views/ui_page_customizations.py:241
 #, fuzzy
 msgid "Upload preview image"
-msgstr "Сохранить изображение"
+msgstr "Зберегти зображення"
 
 #: zapzap/views/ui_page_customizations.py:242
 msgid "Replace preview image"
@@ -429,7 +428,7 @@ msgstr ""
 #: zapzap/views/ui_page_customizations.py:250
 #, fuzzy
 msgid "Import .css"
-msgstr "Сообщить о проблеме"
+msgstr "повідомити про проблему"
 
 #: zapzap/views/ui_page_customizations.py:251
 #: zapzap/views/ui_page_customizations.py:265
@@ -444,7 +443,7 @@ msgstr ""
 #: zapzap/controllers/PageDebugging.py:87
 #, fuzzy
 msgid "Open folder"
-msgstr "Выбор папки"
+msgstr "Вибір папки"
 
 #: zapzap/views/ui_page_customizations.py:253
 msgid "JavaScript"
@@ -474,11 +473,11 @@ msgstr ""
 #: zapzap/views/ui_page_customizations.py:269
 #: zapzap/controllers/DownloadDialog.py:99
 msgid "Save"
-msgstr "Сохранить"
+msgstr "Зберегти"
 
 #: zapzap/views/ui_page_general.py:148 zapzap/views/ui_settings.py:153
 msgid "General"
-msgstr "Общие сведения"
+msgstr "Загальні відомості"
 
 #: zapzap/views/ui_page_general.py:149
 msgid "Flatpak Permissions"
@@ -486,7 +485,7 @@ msgstr ""
 
 #: zapzap/views/ui_page_general.py:150 zapzap/webengine/WebView.py:282
 msgid "Copy"
-msgstr "Копировать"
+msgstr "Копіювати"
 
 #: zapzap/views/ui_page_general.py:151
 msgid "Select and copy this command in your terminal"
@@ -512,19 +511,19 @@ msgstr ""
 
 #: zapzap/views/ui_page_general.py:155
 msgid "Download Directory"
-msgstr "Каталог загрузки"
+msgstr "Каталог завантаження"
 
 #: zapzap/views/ui_page_general.py:156
 msgid "Set new folder for downloads"
-msgstr "Установить новую папку для загрузок"
+msgstr "встановити нову папку для завантаження"
 
 #: zapzap/views/ui_page_general.py:157
 msgid "Define default folder for downloads"
-msgstr "Определите папку по умолчанию для загрузок"
+msgstr "Визначте папку по замовчуванню для завантаження"
 
 #: zapzap/views/ui_page_general.py:158
 msgid "Spellchecker"
-msgstr "Проверка орфографии"
+msgstr "Перевірка орфографії"
 
 #: zapzap/views/ui_page_general.py:159
 msgid "Directory"
@@ -532,52 +531,52 @@ msgstr "Каталог"
 
 #: zapzap/views/ui_page_general.py:160
 msgid "Recognizes only compiled dictionaries (.bdic)"
-msgstr "Распознает только скомпилированные словари (.bdic)"
+msgstr "Розпізнає лише зкомпільовані словники (.bdic)"
 
 #: zapzap/views/ui_page_general.py:161
 msgid "Define standard dictionaries"
-msgstr "Определить стандартные словари"
+msgstr "Визначити стандартні словники"
 
 #: zapzap/views/ui_page_general.py:162
 msgid "Note: Required restart."
-msgstr "Примечание: Требуется перезапуск."
+msgstr "Примітка: Необхідне перезавантаження"
 
 #: zapzap/views/ui_page_general.py:163
 msgid "Behavior"
-msgstr "Поведение"
+msgstr "Поведінка"
 
 #: zapzap/views/ui_page_general.py:164
 #, fuzzy
 msgid "Confirm before closing the window"
-msgstr "Закрывать при закрытии окна"
+msgstr "Закривати при закритті вікна"
 
 #: zapzap/views/ui_page_general.py:165
 msgid "Close when closing the window"
-msgstr "Закрывать при закрытии окна"
+msgstr "Закривати при закритті вікна"
 
 #: zapzap/views/ui_page_general.py:166
 msgid "Start minimized"
-msgstr "Запускать свернутым"
+msgstr "Запускати згорнутим"
 
 #: zapzap/views/ui_page_general.py:167
 msgid "Start with the system"
-msgstr "Запускать при старте системы"
+msgstr "Запускати під час старту системи"
 
 #: zapzap/views/ui_page_general.py:168
 msgid "Don't use a platform-native file dialog"
-msgstr "Не использовать нативное диалоговое окно для файлов"
+msgstr "Не використовувати системне діалогове вікно для файлів"
 
 #: zapzap/views/ui_page_general.py:169
 msgid "Wayland window system"
-msgstr "Оконная система Wayland"
+msgstr "Віконна система Wayland"
 
 #: zapzap/views/ui_page_network.py:111 zapzap/views/ui_settings.py:160
 msgid "Network"
-msgstr "Сетевые настройки"
+msgstr "Мережеві налаштування"
 
 #: zapzap/views/ui_page_network.py:112
 msgid "Network proxy"
-msgstr "Сетевой прокси-сервер"
+msgstr "Мережевий проксі-сервер"
 
 #: zapzap/views/ui_page_network.py:113
 msgid "Port"
@@ -585,7 +584,7 @@ msgstr "Порт"
 
 #: zapzap/views/ui_page_network.py:114
 msgid "User"
-msgstr "Пользователь"
+msgstr "Користувач"
 
 #: zapzap/views/ui_page_network.py:115
 msgid "Password"
@@ -593,23 +592,23 @@ msgstr "Пароль"
 
 #: zapzap/views/ui_page_network.py:116
 msgid "Hostname"
-msgstr "Имя узла"
+msgstr "Ім'я' вузла"
 
 #: zapzap/views/ui_page_network.py:117
 msgid "ProxyType"
-msgstr "Тип прокси"
+msgstr "Тип проксі"
 
 #: zapzap/views/ui_page_network.py:118
 msgid "Description"
-msgstr "Описание"
+msgstr "Опис"
 
 #: zapzap/views/ui_page_network.py:119
 msgid "Apply"
-msgstr "Применить"
+msgstr "Прийняти"
 
 #: zapzap/views/ui_page_network.py:120
 msgid "Restore"
-msgstr "Восстановить"
+msgstr "Відновити"
 
 #: zapzap/views/ui_page_network.py:121
 msgid "Prevents websites from discovering your network address using WebRTC."
@@ -621,28 +620,28 @@ msgstr ""
 
 #: zapzap/views/ui_page_notifications.py:69 zapzap/views/ui_settings.py:158
 msgid "Notifications"
-msgstr "Уведомления"
+msgstr "Сповіщення"
 
 #: zapzap/views/ui_page_notifications.py:70
 msgid "Work area notifications"
-msgstr "Уведомления в рабочей области"
+msgstr "Сповіщення в робочій області"
 
 #: zapzap/views/ui_page_notifications.py:71
 msgid "Show the photo of the sender"
-msgstr "Показать фото отправителя"
+msgstr "Показати фото відправника"
 
 #: zapzap/views/ui_page_notifications.py:72
 msgid "Show the sender's name"
-msgstr "Показать имя отправителя"
+msgstr "Показати ім'я' відправника"
 
 #: zapzap/views/ui_page_notifications.py:73
 msgid "Show message preview"
-msgstr "Показать предпросмотр сообщения"
+msgstr "Показати попередній перегляд повідомлення"
 
 #: zapzap/views/ui_page_notifications.py:74
 #, fuzzy
 msgid "Hide donation notification"
-msgstr "Отключить уведомления"
+msgstr "Відключити сповіщення"
 
 #: zapzap/views/ui_page_notifications.py:75
 msgid ""
@@ -652,7 +651,7 @@ msgstr ""
 
 #: zapzap/views/ui_page_performance.py:136
 msgid "Performance (Experimental)"
-msgstr "Производительность (экспериментально)"
+msgstr "Продуктивність (експериментально)"
 
 #: zapzap/views/ui_page_performance.py:137
 msgid "Cache and Storage"
@@ -661,12 +660,12 @@ msgstr ""
 #: zapzap/views/ui_page_performance.py:138
 #, fuzzy
 msgid "Cache type"
-msgstr "Тип кэша"
+msgstr "Тип кешу"
 
 #: zapzap/views/ui_page_performance.py:139
 #, fuzzy
 msgid "Maximum cache size"
-msgstr "Максимальный размер кэша"
+msgstr "Максимальний розмір кешу"
 
 #: zapzap/views/ui_page_performance.py:140
 msgid "0 MB"
@@ -699,7 +698,7 @@ msgstr ""
 
 #: zapzap/views/ui_page_performance.py:147
 msgid "Disable GPU hardware acceleration"
-msgstr "Отключить аппаратное ускорение GPU"
+msgstr "Відключити апаратне прискорення GPU"
 
 #: zapzap/views/ui_page_performance.py:148
 msgid "Disable GPU VSync"
@@ -715,7 +714,7 @@ msgstr ""
 
 #: zapzap/views/ui_page_performance.py:151
 msgid "Run everything in a single process"
-msgstr "Запускать все в одном процессе"
+msgstr "Запускати все в одному процесі"
 
 #: zapzap/views/ui_page_performance.py:152
 msgid "Use one process per site"
@@ -744,11 +743,11 @@ msgstr ""
 #: zapzap/views/ui_page_performance.py:158
 #, fuzzy
 msgid "Web Behavior"
-msgstr "Поведение"
+msgstr "Поведінка"
 
 #: zapzap/views/ui_page_performance.py:159
 msgid "Animated scrolling"
-msgstr "Анимированная прокрутка"
+msgstr "Анімоване прокручування"
 
 #: zapzap/views/ui_page_performance.py:160
 msgid "Allow background optimizations"
@@ -757,7 +756,7 @@ msgstr ""
 #: zapzap/views/ui_page_performance.py:161
 #, fuzzy
 msgid "Disable page animations"
-msgstr "Отключить аппаратное ускорение GPU"
+msgstr "Відключити апаратне прискорення GPU"
 
 #: zapzap/views/ui_page_performance.py:162
 msgid "Disable pinch to zoom"
@@ -766,11 +765,11 @@ msgstr ""
 #: zapzap/views/ui_page_performance.py:163
 #, fuzzy
 msgid "Restore defaults"
-msgstr "Восстановить стандарт"
+msgstr "Відновити стандарт"
 
 #: zapzap/views/ui_page_performance.py:164
 msgid "Note: Restart required to apply changes."
-msgstr "Примечание: Для применения изменений требуется перезагрузка."
+msgstr "Примітка: Для застосування змін необхідний перезапуск."
 
 #: zapzap/views/ui_qtoaster_donation.py:164
 msgid "Support the project"
@@ -785,7 +784,7 @@ msgstr ""
 #: zapzap/views/ui_qtoaster_donation.py:167
 #, fuzzy
 msgid "❤ Make a donation"
-msgstr "Пожертвовать"
+msgstr "Задонатити"
 
 #: zapzap/views/ui_qtoaster_donation.py:168
 msgid "Don't show again"
@@ -801,19 +800,19 @@ msgstr "Назад"
 
 #: zapzap/views/ui_settings.py:152
 msgid "SETTINGS"
-msgstr "НАСТРОЙКИ"
+msgstr "НАЛАШТУВАННЯ"
 
 #: zapzap/views/ui_settings.py:154
 msgid "Accounts"
-msgstr "Аккаунт"
+msgstr "Акаунт"
 
 #: zapzap/views/ui_settings.py:155
 msgid "TOOLS"
-msgstr "ИНСТРУМЕНТЫ"
+msgstr "ІНСТРУМЕНТИ"
 
 #: zapzap/views/ui_settings.py:159
 msgid "Performance"
-msgstr "Производительность"
+msgstr "Продуктивність"
 
 #: zapzap/views/ui_settings.py:161 zapzap/controllers/PageDebugging.py:59
 msgid "Debugging"
@@ -821,16 +820,16 @@ msgstr ""
 
 #: zapzap/views/ui_settings.py:162
 msgid "HELP"
-msgstr "СПРАВКА"
+msgstr "ДОВІДКА"
 
 #: zapzap/views/ui_settings.py:164
 #, fuzzy
 msgid "Donate"
-msgstr "Пожертвования"
+msgstr "Донати"
 
 #: zapzap/views/ui_shortcuts_dialog.py:55
 msgid "Dialog"
-msgstr "Диалог"
+msgstr "Діалог"
 
 #: zapzap/views/ui_shortcuts_dialog.py:57
 msgid "WhatsApp Web"
@@ -883,12 +882,12 @@ msgstr ""
 #: zapzap/controllers/Browser.py:237 zapzap/controllers/Browser.py:284
 #, python-brace-format
 msgid "Account {}"
-msgstr "Аккаунт {}"
+msgstr "Акаунт {}"
 
 #: zapzap/controllers/Browser.py:292
 #, fuzzy
 msgid "Account disabled"
-msgstr "Аккаунт"
+msgstr "Акаунт"
 
 #: zapzap/controllers/Browser.py:293
 msgid "This account is disabled."
@@ -913,11 +912,11 @@ msgstr ""
 
 #: zapzap/controllers/CardUser.py:144
 msgid "Confirm exclusion"
-msgstr "Подтвердить исключение"
+msgstr "Підтвердити винятки"
 
 #: zapzap/controllers/CardUser.py:144
 msgid "Are you sure you want to delete this item?"
-msgstr "Вы уверены, что хотите удалить этот элемент?"
+msgstr "Ви впевнені, що хочете видалити цей елемент?"
 
 #: zapzap/controllers/CardUser.py:169
 msgid "User-Agent Changed"
@@ -931,11 +930,11 @@ msgstr ""
 #: zapzap/controllers/CardUser.py:175 zapzap/controllers/CardUser.py:220
 #, fuzzy
 msgid "Generate new colors for the icon"
-msgstr "Нажмите, чтобы создать новые цвета для иконки"
+msgstr "Натисніть, щоб створити нові кольори для іконки"
 
 #: zapzap/controllers/CardUser.py:178 zapzap/controllers/CardUser.py:223
 msgid "Restore standard"
-msgstr "Восстановить стандарт"
+msgstr "Відновити стандарт"
 
 #: zapzap/controllers/CardUser.py:205
 msgid "User-Agent"
@@ -951,7 +950,7 @@ msgstr "ZapZap"
 #: zapzap/controllers/MainWindow.py:248
 #, fuzzy
 msgid "Are you sure you want to close?"
-msgstr "Вы уверены, что хотите удалить этот элемент?"
+msgstr "Ви впевнені, що хочете видалити цей елемент?"
 
 #: zapzap/controllers/ClientSideRendering.py:442
 #: zapzap/controllers/MainWindow.py:253
@@ -983,11 +982,11 @@ msgstr ""
 #: zapzap/controllers/DownloadDialog.py:30
 #, fuzzy
 msgid "Download"
-msgstr "Каталог загрузки"
+msgstr "Каталог завантаження"
 
 #: zapzap/controllers/DownloadDialog.py:89
 msgid "Open"
-msgstr "Открыть"
+msgstr "Відкрити"
 
 #: zapzap/controllers/DownloadDialog.py:117
 msgid "More"
@@ -996,7 +995,7 @@ msgstr ""
 #: zapzap/controllers/DownloadDialog.py:127
 #, fuzzy
 msgid "Save as"
-msgstr "Сохранить"
+msgstr "Зберегти"
 
 #: zapzap/controllers/DownloadDialog.py:141
 msgid "Cancel"
@@ -1004,13 +1003,13 @@ msgstr ""
 
 #: zapzap/controllers/DownloadDialog.py:276
 msgid "Save file"
-msgstr "Сохранить файл"
+msgstr "Зберегти файл"
 
 #: zapzap/controllers/OnboardingDialog.py:46
 #: zapzap/controllers/OnboardingDialog.py:71
 #, fuzzy
 msgid "Welcome to ZapZap"
-msgstr "Добро пожаловать в"
+msgstr "Ласкаво просимо в"
 
 #: zapzap/controllers/OnboardingDialog.py:76
 msgid "Quick setup for your preferred environment"
@@ -1048,17 +1047,17 @@ msgstr ""
 #: zapzap/controllers/OnboardingDialog.py:196
 #, fuzzy
 msgid "Quit app when closing the window"
-msgstr "Закрывать при закрытии окна"
+msgstr "Закривати при закритті вікна"
 
 #: zapzap/controllers/OnboardingDialog.py:201
 #, fuzzy
 msgid "Enable spell checker"
-msgstr "Проверка орфографии"
+msgstr "Перевірка орфографії"
 
 #: zapzap/controllers/OnboardingDialog.py:206
 #, fuzzy
 msgid "Start automatically with the system"
-msgstr "Запускать при старте системы"
+msgstr "Запускати під час старту системи"
 
 #: zapzap/controllers/OnboardingDialog.py:211
 msgid "Prefer Wayland (when available)"
@@ -1067,7 +1066,7 @@ msgstr ""
 #: zapzap/controllers/OnboardingDialog.py:219
 #: zapzap/controllers/PageGeneral.py:43
 msgid "Use Flatseal to change this mode of execution"
-msgstr "Используйте Flatseal, чтобы изменить этот способ выполнения"
+msgstr "Використовуйте Flatseal, щоб змінити цей спосіб виконання"
 
 #: zapzap/controllers/OnboardingDialog.py:231
 msgid "You can change all these options later in Settings."
@@ -1080,27 +1079,27 @@ msgstr ""
 #: zapzap/controllers/OnboardingDialog.py:254
 #, fuzzy
 msgid "Enable app notifications"
-msgstr "Уведомления в рабочей области"
+msgstr "Сповіщення в робочій області"
 
 #: zapzap/controllers/OnboardingDialog.py:260
 #, fuzzy
 msgid "Show message content in notifications"
-msgstr "Отключить уведомления"
+msgstr "Відключити сповіщення"
 
 #: zapzap/controllers/OnboardingDialog.py:265
 #, fuzzy
 msgid "Show contact name in notifications"
-msgstr "Отключить уведомления"
+msgstr "Відключити сповіщення"
 
 #: zapzap/controllers/OnboardingDialog.py:270
 #, fuzzy
 msgid "Show contact photo in notifications"
-msgstr "Отключить уведомления"
+msgstr "Відключити сповіщення"
 
 #: zapzap/controllers/OnboardingDialog.py:275
 #, fuzzy
 msgid "Hide donation reminders"
-msgstr "Отключить уведомления"
+msgstr "Відключити сповіщення"
 
 #: zapzap/controllers/OnboardingDialog.py:313
 msgid "Flatpak sandbox permissions"
@@ -1116,7 +1115,7 @@ msgstr ""
 #: zapzap/controllers/OnboardingDialog.py:516
 #, fuzzy
 msgid "Copy command"
-msgstr "Копировать изображение"
+msgstr "Копіювати зображення"
 
 #: zapzap/controllers/OnboardingDialog.py:336
 msgid "Open Flatseal page"
@@ -1125,7 +1124,7 @@ msgstr ""
 #: zapzap/controllers/OnboardingDialog.py:354
 #, fuzzy
 msgid "Setup complete"
-msgstr "Перезагрузить страницу"
+msgstr "перезавантажити сторінку"
 
 #: zapzap/controllers/OnboardingDialog.py:358
 msgid ""
@@ -1155,7 +1154,7 @@ msgstr ""
 #: zapzap/controllers/OnboardingDialog.py:514
 #, fuzzy
 msgid "Instructions"
-msgstr "Информация"
+msgstr "інформація"
 
 #: zapzap/controllers/OnboardingDialog.py:517
 msgid "Close"
@@ -1172,12 +1171,12 @@ msgstr ""
 #: zapzap/controllers/PageCustomizations.py:53
 #, fuzzy
 msgid "Current account"
-msgstr "Новый аккаунт"
+msgstr "Новий акаунт"
 
 #: zapzap/controllers/PageCustomizations.py:153
 #, fuzzy
 msgid "Unnamed account"
-msgstr "Новый аккаунт"
+msgstr "Новий акаунт"
 
 #: zapzap/controllers/PageCustomizations.py:155
 #, python-brace-format
@@ -1220,7 +1219,7 @@ msgstr ""
 #: zapzap/controllers/PageCustomizations.py:267
 #, fuzzy
 msgid "Download is too large."
-msgstr "Каталог загрузки"
+msgstr "Каталог завантаження"
 
 #: zapzap/controllers/PageCustomizations.py:275
 msgid "Could not download CSS from URL."
@@ -1233,7 +1232,7 @@ msgstr ""
 #: zapzap/controllers/PageCustomizations.py:289
 #, fuzzy
 msgid "Select a file first."
-msgstr "Выбор папки"
+msgstr "Вибір папки"
 
 #: zapzap/controllers/PageCustomizations.py:368
 msgid "No preview available."
@@ -1265,7 +1264,7 @@ msgstr ""
 #: zapzap/controllers/PageCustomizations.py:449
 #, fuzzy
 msgid "Select preview image"
-msgstr "Сохранить изображение"
+msgstr "Зберегти зображення"
 
 #: zapzap/controllers/PageCustomizations.py:465
 msgid "Could not set preview image."
@@ -1306,7 +1305,7 @@ msgstr ""
 #: zapzap/controllers/PageCustomizations.py:550
 #, fuzzy
 msgid "Select file"
-msgstr "Выбор папки"
+msgstr "Вибір папки"
 
 #: zapzap/controllers/PageCustomizations.py:567
 msgid "Could not import file."
@@ -1319,7 +1318,7 @@ msgstr ""
 #: zapzap/controllers/PageCustomizations.py:602
 #, fuzzy
 msgid "Create file"
-msgstr "Сохранить файл"
+msgstr "Зберегти файл"
 
 #: zapzap/controllers/PageCustomizations.py:610
 #: zapzap/controllers/PageCustomizations.py:658
@@ -1361,12 +1360,12 @@ msgstr ""
 #: zapzap/controllers/PageCustomizations.py:745
 #, fuzzy
 msgid "Reload complete."
-msgstr "Перезагрузить страницу"
+msgstr "перезавантажити сторінку"
 
 #: zapzap/controllers/PageCustomizations.py:774
 #, fuzzy, python-brace-format
 msgid "{}. Save and reload to apply changes."
-msgstr "Примечание: Для применения изменений требуется перезагрузка."
+msgstr "Примітка: Для застосування змін необхідний перезапуск."
 
 #: zapzap/controllers/PageCustomizations.py:785
 msgid "JS"
@@ -1375,7 +1374,7 @@ msgstr ""
 #: zapzap/controllers/PageCustomizations.py:788
 #, fuzzy
 msgid "Confirm deletion"
-msgstr "Подтвердить исключение"
+msgstr "Підтвердити винятки"
 
 #: zapzap/controllers/PageCustomizations.py:789
 #, python-brace-format
@@ -1405,12 +1404,12 @@ msgstr ""
 #: zapzap/controllers/PageNetwork.py:23
 #, fuzzy
 msgid "Settings for:"
-msgstr "Настройки"
+msgstr "Налаштування"
 
 #: zapzap/controllers/PageNetwork.py:25
 #, fuzzy
 msgid "Global (Default)"
-msgstr "По-умолчанию"
+msgstr "По-замовчуванню"
 
 #: zapzap/controllers/PagePerformance.py:256
 msgid ""
@@ -1512,55 +1511,55 @@ msgstr ""
 
 #: zapzap/controllers/ShortcutsDialog.py:11
 msgid "Mark as unread"
-msgstr "Пометить непрочитанным"
+msgstr "Позначити непрочитаним"
 
 #: zapzap/controllers/ShortcutsDialog.py:12
 msgid "Archive conversation"
-msgstr "Архивировать разговор"
+msgstr "архівувати розмову"
 
 #: zapzap/controllers/ShortcutsDialog.py:13
 msgid "Pin conversation"
-msgstr "Закрепить разговор"
+msgstr "Закріпити розмову"
 
 #: zapzap/controllers/ShortcutsDialog.py:14
 msgid "Next conversation"
-msgstr "Следующий разговор"
+msgstr "Наступна розмова"
 
 #: zapzap/controllers/ShortcutsDialog.py:15
 msgid "Close conversation"
-msgstr "Закрыть разговор"
+msgstr "Закрити розмову"
 
 #: zapzap/controllers/ShortcutsDialog.py:16
 msgid "Search in conversation"
-msgstr "Поиск по разговорам"
+msgstr "Пошук по розмовах"
 
 #: zapzap/controllers/ShortcutsDialog.py:17
 msgid "Previous conversation"
-msgstr "Предыдущий разговор"
+msgstr "Попередня розмова"
 
 #: zapzap/controllers/ShortcutsDialog.py:18
 msgid "Delete conversation"
-msgstr "Удалить разговор"
+msgstr "Видалити розмову"
 
 #: zapzap/controllers/ShortcutsDialog.py:21
 msgid "Profile and status"
-msgstr "Профиль и статус"
+msgstr "Профіль і статус"
 
 #: zapzap/controllers/ShortcutsDialog.py:25
 msgid "Decrease speed of selected voice message"
-msgstr "Уменьшение скорости выбранного голосового сообщения"
+msgstr "Зменшення швидкості вибраного голосового повідомлення"
 
 #: zapzap/controllers/ShortcutsDialog.py:26
 msgid "Increase speed of selected voice message"
-msgstr "Увеличение скорости выбранного голосового сообщения"
+msgstr "Збільшення швидкості вибраного голосового повідомлення"
 
 #: zapzap/controllers/ShortcutsDialog.py:29
 msgid "Emoji panel"
-msgstr "Панель эмодзи"
+msgstr "Панель емодзі"
 
 #: zapzap/controllers/ShortcutsDialog.py:30
 msgid "Sticker panel"
-msgstr "Панель стикеров"
+msgstr "Панель стікерів"
 
 #: zapzap/controllers/ShortcutsDialog.py:31
 msgid "GIF panel"
@@ -1568,39 +1567,39 @@ msgstr "Панель GIF"
 
 #: zapzap/controllers/ShortcutsDialog.py:34
 msgid "Lock the app"
-msgstr "Заблокировать приложение"
+msgstr "Заблокувати додаток"
 
 #: zapzap/controllers/ShortcutsDialog.py:35
 msgid "Mute"
-msgstr "Обеззвучить"
+msgstr "Без звуку"
 
 #: zapzap/controllers/ShortcutsDialog.py:36
 msgid "Search"
-msgstr "Поиск"
+msgstr "Пошук"
 
 #: zapzap/controllers/ShortcutsDialog.py:37
 msgid "New group"
-msgstr "Новая группа"
+msgstr "Нова група"
 
 #: zapzap/controllers/ShortcutsDialog.py:38
 msgid "Extended search"
-msgstr "Расширенный поиск"
+msgstr "Розширений пошук"
 
 #: zapzap/controllers/ShortcutsDialog.py:45
 msgid "Exit"
-msgstr "Выход"
+msgstr "Вихід"
 
 #: zapzap/controllers/ShortcutsDialog.py:48
 msgid "Fullscreen"
-msgstr "Полноэкранный"
+msgstr "Повноекранний"
 
 #: zapzap/controllers/ShortcutsDialog.py:57
 msgid "Reload pages"
-msgstr "Перезагрузить страницу"
+msgstr "перезавантажити сторінку"
 
 #: zapzap/controllers/ShortcutsDialog.py:58
 msgid "New conversation by phone number"
-msgstr "Новый разговор по номеру телефона"
+msgstr "Нова розмова за номером телефону"
 
 #: zapzap/controllers/PageDebugging.py:75
 #: zapzap/controllers/PageDebugging.py:184
@@ -1612,12 +1611,12 @@ msgstr ""
 #: zapzap/controllers/PageDebugging.py:88
 #, fuzzy
 msgid "Delete old"
-msgstr "Удалить"
+msgstr "Видалити"
 
 #: zapzap/controllers/PageDebugging.py:89
 #, fuzzy
 msgid "Delete all"
-msgstr "Выбрать всё"
+msgstr "Вибрати всё"
 
 #: zapzap/controllers/PageDebugging.py:95
 #: zapzap/controllers/PageDebugging.py:219
@@ -1625,7 +1624,7 @@ msgstr "Выбрать всё"
 #: zapzap/controllers/PageDebugging.py:246
 #, fuzzy
 msgid "Reset settings"
-msgstr "Настройки"
+msgstr "Налаштування"
 
 #: zapzap/controllers/PageDebugging.py:101
 msgid "Runtime environment"
@@ -1695,7 +1694,7 @@ msgstr ""
 
 #: zapzap/services/AlertManager.py:35
 msgid "Information"
-msgstr "Информация"
+msgstr "інформація"
 
 #: zapzap/services/AlertManager.py:35
 #, python-brace-format
@@ -1703,58 +1702,58 @@ msgid ""
 "Limit of {} users reached.\n"
 "It is not possible to create more users!"
 msgstr ""
-"Достигнут лимит {} пользователей.\n"
-"Невозможно создать больше пользователей!"
+"Досягнуто ліміту {} користувачів.\n"
+"Неможливо створити більше користувачів!"
 
 #: zapzap/services/AlertManager.py:39
 msgid "Attention"
-msgstr "Внимание"
+msgstr "Увага"
 
 #: zapzap/services/AlertManager.py:39
 msgid "No active account!"
-msgstr "Нет активного аккаунта!"
+msgstr "Немає активного акаунта!"
 
 #: zapzap/services/DownloadManager.py:79
 #, fuzzy
 msgid "Select folder"
-msgstr "Выбор папки"
+msgstr "Вибір папки"
 
 #: zapzap/services/ProxyManager.py:9
 msgid "No proxying is used."
-msgstr "Проксирование не используется."
+msgstr "Проксі не використовується."
 
 #: zapzap/services/ProxyManager.py:10
 msgid "Proxy is determined based on the system proxy."
-msgstr "Прокси определяется на основе системного прокси."
+msgstr "Проксі визначається на основі системного проксі."
 
 #: zapzap/services/ProxyManager.py:11
 msgid "Socks5 proxying is used."
-msgstr "Используется проксирование Socks5."
+msgstr "Використовується проксі Socks5."
 
 #: zapzap/services/ProxyManager.py:12
 msgid "HTTP transparent proxying is used."
-msgstr "Используется прозрачное проксирование HTTP."
+msgstr "Використовується прозоре проксі HTTP."
 
 #: zapzap/services/ProxyManager.py:13
 msgid "Proxying for HTTP requests only."
-msgstr "Проксирование только для HTTP-запросов."
+msgstr "Проксі лише для HTTP-запитів."
 
 #: zapzap/services/ProxyManager.py:14
 msgid "Proxying for FTP requests only."
-msgstr "Проксирование только для FTP-запросов."
+msgstr "Проксі лише для FTP-запитів."
 
 #: zapzap/services/SysTrayManager.py:54
 msgid "Show"
-msgstr "Показать"
+msgstr "Показати"
 
 #: zapzap/services/SysTrayManager.py:56
 msgid "Donation"
-msgstr "Пожертвования"
+msgstr "Донати"
 
 #: zapzap/services/EnvironmentDetector.py:5
 #, fuzzy
 msgid "Official"
-msgstr "Версия {id} (Официальная сборка)"
+msgstr "Версія {id} (Офіційна збірка)"
 
 #: zapzap/services/EnvironmentDetector.py:6
 msgid "Community"
@@ -1780,46 +1779,46 @@ msgstr ""
 
 #: zapzap/webengine/WebView.py:281
 msgid "Undo"
-msgstr "Отменить"
+msgstr "Відмінити"
 
 #: zapzap/webengine/WebView.py:281
 msgid "Redo"
-msgstr "Повторить"
+msgstr "Повторити"
 
 #: zapzap/webengine/WebView.py:281
 msgid "Cut"
-msgstr "Вырезать"
+msgstr "Вирізати"
 
 #: zapzap/webengine/WebView.py:282
 msgid "Paste"
-msgstr "Вставить"
+msgstr "Вставити"
 
 #: zapzap/webengine/WebView.py:282
 #, fuzzy
 msgid "Select all"
-msgstr "Выбрать всё"
+msgstr "Вибрати всё"
 
 #: zapzap/webengine/WebView.py:283
 #, fuzzy
 msgid "Save image"
-msgstr "Сохранить файл"
+msgstr "Зберегти файл"
 
 #: zapzap/webengine/WebView.py:283
 #, fuzzy
 msgid "Copy image"
-msgstr "Копировать изображение"
+msgstr "Копіювати зображення"
 
 #: zapzap/webengine/WebView.py:284 zapzap/webengine/WebView.py:314
 msgid "Copy link address"
-msgstr "Копировать адрес ссылки"
+msgstr "Копіювати адресу посилання"
 
 #: zapzap/webengine/WebView.py:334
 msgid "Check Spelling"
-msgstr "Проверка орфографии"
+msgstr "Перевірка орфографії"
 
 #: zapzap/webengine/WebView.py:342
 msgid "Select Language"
-msgstr "Выбор языка"
+msgstr "Вибір мови"
 
 #: zapzap/webengine/WebView.py:536
 #, python-brace-format
@@ -1827,13 +1826,13 @@ msgid "DevTools - {}"
 msgstr ""
 
 #~ msgid "Welcome to"
-#~ msgstr "Добро пожаловать в"
+#~ msgstr "Ласкаво просимо в"
 
 #~ msgid "Learn more"
-#~ msgstr "Изучить больше"
+#~ msgstr "Вивчити більше"
 
 #~ msgid "Report issue"
-#~ msgstr "Сообщить о проблеме"
+#~ msgstr "повідомити про проблему"
 
 #~ msgid "WhatsApp Web for Linux"
 #~ msgstr "WhatsApp Web для Linux"
@@ -1844,20 +1843,20 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "Note: changing CSR enabled state requires restart."
-#~ msgstr "Примечание: Требуется перезапуск."
+#~ msgstr "Примітка: Необхідне перезавантаження"
 
 #, fuzzy
 #~ msgid "Downloads folder"
-#~ msgstr "Каталог загрузки"
+#~ msgstr "Каталог завантаження"
 
 #~ msgid "Cache Behavior"
-#~ msgstr "Поведение кэша"
+#~ msgstr "Поведінка кешу"
 
 #~ msgid "QWebEngine Behavior"
-#~ msgstr "Поведение QWebEngine"
+#~ msgstr "Поведінка QWebEngine"
 
 #~ msgid "Enable single process for GPU and rendering"
-#~ msgstr "Включите единый процесс для GPU и рендеринга"
+#~ msgstr "Включіть єдиний процес для GPU і рендерингу"
 
 #~ msgid "New message..."
-#~ msgstr "Новое сообщение..."
+#~ msgstr "Нове повідомлення..."
