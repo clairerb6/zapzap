@@ -28,9 +28,21 @@ rm *.deb -f
 rm deb_build -Rf
 
 VERSION="$(python3 - <<'PY'
-from zapzap import __version__
+import ast
+from pathlib import Path
 
-print(__version__)
+module = Path("zapzap/__init__.py")
+tree = ast.parse(module.read_text(encoding="utf-8"), filename=str(module))
+
+for node in tree.body:
+    if isinstance(node, ast.Assign):
+        for target in node.targets:
+            if isinstance(target, ast.Name) and target.id == "__version__":
+                value = ast.literal_eval(node.value)
+                print(value)
+                raise SystemExit(0)
+
+raise SystemExit("Could not find __version__ in zapzap/__init__.py")
 PY
 )"
 
