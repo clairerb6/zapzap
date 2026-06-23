@@ -5,10 +5,46 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 cd "${REPO_ROOT}"
 
+BUILD_INFO_PATH="zapzap/BuildInfo.py"
+BUILD_INFO_BACKUP=""
+
+if [[ -f "${BUILD_INFO_PATH}" ]]; then
+  BUILD_INFO_BACKUP="$(mktemp)"
+  cp "${BUILD_INFO_PATH}" "${BUILD_INFO_BACKUP}"
+fi
+
+cleanup_build_info() {
+  if [[ -n "${BUILD_INFO_BACKUP}" && -f "${BUILD_INFO_BACKUP}" ]]; then
+    cp "${BUILD_INFO_BACKUP}" "${BUILD_INFO_PATH}"
+    rm -f "${BUILD_INFO_BACKUP}"
+  else
+    rm -f "${BUILD_INFO_PATH}"
+  fi
+}
+
+trap cleanup_build_info EXIT
+
 rm *.deb -f
 rm deb_build -Rf
 
-VERSION=$(cat zapzap/__init__.py | grep '__version__' | awk '{print $3}' | sed "s/'//g")
+VERSION="$(python3 - <<'PY'
+from zapzap import __version__
+
+print(__version__)
+PY
+)"
+
+BUILD_REPOSITORY="$(git config --get remote.origin.url || true)"
+BUILD_REPOSITORY="${BUILD_REPOSITORY:-https://github.com/clairerb6/zapzap.git}"
+
+BUILD_CHANNEL="DEB" \
+BUILD_PROVIDER="clairerb6 Debian package" \
+BUILD_REPOSITORY="${BUILD_REPOSITORY}" \
+python3 - <<'PY'
+from builders.common import create_build_info
+
+create_build_info()
+PY
 
 mkdir -p deb_build/usr/local/bin deb_build/usr/share/zapzap deb_build/DEBIAN
 mkdir -p deb_build/usr/share/applications
@@ -33,7 +69,7 @@ Version: $VERSION
 Section: utils
 Priority: optional
 Architecture: amd64
-Depends: python3, python3-pyqt6.qtwebengine, python3-pyqt6.qtsvg, python3-dbus
+Depends: python3, python3-pyqt6.qtwebengine, python3-dbus
 Maintainer: Katherine Flores <me@katherineflores.me>
 Description: ZapZap - Cliente no oficial de WhatsApp Web para Linux.
 EOF

@@ -14,6 +14,25 @@ class Packaging(Enum):
 
 class EnvironmentManager:
     @staticmethod
+    def _packaging_from_build_channel():
+        try:
+            from zapzap.services.EnvironmentDetector import EnvironmentDetector
+
+            channel = str(EnvironmentDetector.CHANNEL).strip().upper()
+        except Exception:
+            return None
+
+        channel_map = {
+            "APPIMAGE": Packaging.APPIMAGE,
+            "FLATPAK": Packaging.FLATPAK,
+            "RPM": Packaging.RPM,
+            "DEB": Packaging.DEB,
+            "WINDOWS": Packaging.WINDOWS,
+        }
+
+        return channel_map.get(channel)
+
+    @staticmethod
     def identify_distribution() -> str:
         """Identifies Linux distribution using /etc/os-release."""
         os_release_path = "/etc/os-release"
@@ -70,6 +89,10 @@ class EnvironmentManager:
             return Packaging.APPIMAGE
         elif "FLATPAK_ID" in os.environ:
             return Packaging.FLATPAK
+
+        build_packaging = EnvironmentManager._packaging_from_build_channel()
+        if build_packaging is not None:
+            return build_packaging
 
         # Identification via executable path
         app_path = os.path.abspath(sys.argv[0])

@@ -3,7 +3,7 @@
 %global srcname zapzap
 
 Name:           %{srcname}
-Version:        6.5
+Version:        6.5.2.3
 Release:        1%{?dist}
 Summary:        WhatsApp Messenger for Linux
 

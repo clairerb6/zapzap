@@ -29,6 +29,23 @@ jobs:
       - name: Build .deb package
         run: ./_scripts/build-deb.sh
 
+      - name: Validate declared runtime dependencies
+        run: |
+          DEB_FILE="$(ls -1 *.deb | head -n1)"
+          DEPENDS="$(dpkg-deb -f "${DEB_FILE}" Depends)"
+
+          echo "Checking dependencies from ${DEB_FILE}:"
+          echo "${DEPENDS}"
+
+          echo "${DEPENDS}" \
+            | tr ',' '\n' \
+            | sed -E 's/\(.*\)//g; s/\|.*//g; s/^[[:space:]]+//; s/[[:space:]]+$//' \
+            | while read -r dep; do
+                [ -n "${dep}" ] || continue
+                echo "Validating ${dep}"
+                apt-cache show "${dep}" >/dev/null
+              done
+
       # 🧪 Siempre subimos artifact (PRs, pushes, tags)
       - name: Upload .deb artifact
         uses: actions/upload-artifact@v4

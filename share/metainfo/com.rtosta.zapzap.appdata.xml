@@ -55,6 +55,13 @@
   </screenshots>
 
   <releases>
+      <release date="2026-06-23" version="6.5.2.3">
+          <description>
+              <ul>
+                  <li>Local packaging sync release for the fork</li>
+              </ul>
+          </description>
+      </release>
       <release date="2026-06-06" version="6.5.1">
           <description>
               <ul>
