@@ -1,3 +1,35 @@
+# ⚠️ Repository Status
+
+This repository is no longer actively maintained.
+
+Its original purpose was to provide up-to-date native **RPM** and **DEB** packages for ZapZap during a period when official packages were unavailable or lagging behind the upstream project.
+
+Fortunately, this is no longer necessary.
+
+The upstream project once again provides official packages for both Fedora (via COPR) and Debian-based distributions, making this repository obsolete for its original purpose.
+
+Because of that, this repository has been archived as a historical reference.
+
+The build scripts and packaging files will remain available in case they are useful in the future, but no new releases are planned.
+
+## Why was this repository archived?
+
+I wrote a short article explaining the motivation behind this project, the packaging process, and why I believe archiving it is the right decision now.
+
+📖 **When a Fork Is No Longer Needed / Cuando un fork deja de ser necesario**
+
+https://katherineflores.me/2026/08/03/when-a-fork-is-no-longer-needed-cuando-un-fork-deja-de-ser-necesario/
+
+The article is available in both **English** and **Spanish**.
+
+## Recommendation
+
+Please use the official packages provided by the upstream project whenever possible.
+
+Thank you to everyone who downloaded, tested, reported issues, and helped improve these builds. ❤️
+
+
+
 # [ZapZap](https://rtosta.com/zapzap-web/) – WhatsApp Desktop for Linux & Windows
 ![ZapZap for WhatsApp](share/screenshot/default.png)
 
